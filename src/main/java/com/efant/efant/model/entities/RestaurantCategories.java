@@ -16,8 +16,11 @@ public class RestaurantCategories {
     @Column(name = "category_name")
     private String categoryName;
 
-    @OneToMany(mappedBy = "restaurantCategories")
-    List<RestaurantCategoryMapping> restaurantCategoryMappingList;
+    @ManyToMany(mappedBy = "restaurantCategories")
+    List<Restaurant> restaurants;
+
+//    @OneToMany(mappedBy = "restaurantCategories")
+//    List<RestaurantCategoryMapping> restaurantCategoryMappingList;
 
     public long getCategoryId() {
         return categoryId;

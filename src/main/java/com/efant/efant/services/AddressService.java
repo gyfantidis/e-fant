@@ -47,7 +47,6 @@ public class AddressService {
         existingAddress.setFloor(address.getFloor());
         existingAddress.setRingName(address.getRingName());
         existingAddress.setComments(address.getComments());
-        existingAddress.setUserId(address.getUserId());
         existingAddress.setUser(address.getUser());
 
         // Save the updated user entity

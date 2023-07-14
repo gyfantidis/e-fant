@@ -1,20 +1,27 @@
 package com.efant.efant.services;
 
 import com.efant.efant.model.entities.Restaurant;
+import com.efant.efant.model.entities.RestaurantCategories;
+import com.efant.efant.repositories.RestaurantCategoriesRepository;
 import com.efant.efant.repositories.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
+
 
 @Service
 public class RestaurantService {
 
     private RestaurantRepository restaurantRepository;
+    private RestaurantCategoriesRepository restaurantCategoriesRepository;
 
     @Autowired
-    RestaurantService(RestaurantRepository restRepo) {
-        restaurantRepository = restRepo;
+    RestaurantService(RestaurantRepository restaurantRepository, RestaurantCategoriesRepository restaurantCategoriesRepository) {
+        this.restaurantRepository = restaurantRepository;
+        this.restaurantCategoriesRepository = restaurantCategoriesRepository;
     }
 
     public List<Restaurant> getAllRestaurants(){
@@ -44,12 +51,42 @@ public class RestaurantService {
         existingRestaurant.setPhone(restaurant.getPhone());
         existingRestaurant.setImageUrl(restaurant.getImageUrl());
 
+
+        List<String> categoryNames = restaurant.getRestaurantCategories().stream()
+                .map(c-> c.getCategoryName()).collect(Collectors.toList());
+        List<RestaurantCategories> newRestaurantCategory = restaurantCategoriesRepository.getCategoriesName(categoryNames);
+
+        existingRestaurant.setRestaurantCategories(newRestaurantCategory);
+
+
+//        List<String> categoryNames = restaurant.getRestaurantCategories().stream()
+//            .map(c-> c.getCategoryName())
+//            .collect(Collectors.toList());
+//    List<RestaurantCategories> newRestaurantCategory = restaurantCategoriesRepository.findAll(categoryNames);
+//
+
+
+
         existingRestaurant = restaurantRepository.save(existingRestaurant);
         return existingRestaurant;
 
 
 
     }
+
+//    Restaurant existingRestaurant = getById(id);
+//
+//        existingRestaurant.setName(restaurant.getName());
+//
+//    List<String> categoryNames = restaurant.getRestaurantCategories().stream()
+//            .map(c-> c.getName())
+//            .collect(Collectors.toList());
+//    List<RestaurantCategory> newRestaurantCategory = restaurantCategoryRepository.getAllWithName(categoryNames);
+//
+//        existingRestaurant.setRestaurantCategories(newRestaurantCategory);
+
+
+
 
     public void deleteRestaurant(Long id) throws Exception{
         Restaurant restaurant = restaurantRepository.findById(id).orElse(null);

@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "restaurants", schema = "efant", catalog = "postgres")
+@Table(name = "restaurants", schema = "efant")
 public class Restaurant {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -32,8 +32,16 @@ public class Restaurant {
     @Column(name = "created_at")
     private Timestamp createdAt;
 
-    @OneToMany(mappedBy = "restaurant")
-    List<RestaurantCategoryMapping> restaurantCategoryMappingList;
+
+
+    @ManyToMany
+    @JoinTable(
+            name="restaurant_category_mapping",
+            schema = "efant",
+            joinColumns = @JoinColumn(name = "restaurant_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id"))
+    List<RestaurantCategories> restaurantCategories;
+
 
     public long getRestaurantId() {
         return restaurantId;
@@ -89,6 +97,14 @@ public class Restaurant {
 
     public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public List<RestaurantCategories> getRestaurantCategories() {
+        return restaurantCategories;
+    }
+
+    public void setRestaurantCategories(List<RestaurantCategories> restaurantCategories) {
+        this.restaurantCategories = restaurantCategories;
     }
 
     @Override
