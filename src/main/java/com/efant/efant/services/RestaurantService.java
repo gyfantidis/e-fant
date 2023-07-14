@@ -19,7 +19,7 @@ public class RestaurantService {
     private RestaurantCategoriesRepository restaurantCategoriesRepository;
 
     @Autowired
-    RestaurantService(RestaurantRepository restaurantRepository, RestaurantCategoriesRepository restaurantCategoriesRepository) {
+    public RestaurantService(RestaurantRepository restaurantRepository, RestaurantCategoriesRepository restaurantCategoriesRepository) {
         this.restaurantRepository = restaurantRepository;
         this.restaurantCategoriesRepository = restaurantCategoriesRepository;
     }

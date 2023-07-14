@@ -1,10 +1,10 @@
 package com.efant.efant.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "restaurants", schema = "efant")
@@ -31,9 +31,6 @@ public class Restaurant {
     @Basic
     @Column(name = "created_at")
     private Timestamp createdAt;
-
-
-
     @ManyToMany
     @JoinTable(
             name="restaurant_category_mapping",
@@ -41,6 +38,12 @@ public class Restaurant {
             joinColumns = @JoinColumn(name = "restaurant_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     List<RestaurantCategories> restaurantCategories;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy="restaurant")
+    private List<MenuItem> menuItems;
+
+
 
 
     public long getRestaurantId() {
@@ -105,6 +108,14 @@ public class Restaurant {
 
     public void setRestaurantCategories(List<RestaurantCategories> restaurantCategories) {
         this.restaurantCategories = restaurantCategories;
+    }
+
+    public List<MenuItem> getMenuItems() {
+        return menuItems;
+    }
+
+    public void setMenuItems(List<MenuItem> menuItems) {
+        this.menuItems = menuItems;
     }
 
     @Override
