@@ -1,24 +1,37 @@
 package com.efant.efant.model.entities;
-
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "roles", schema = "efant", catalog = "postgres")
 public class Role {
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "role_id")
     private long roleId;
+
     @Basic
     @Column(name = "role_name")
     private String roleName;
 
     @JsonManagedReference
-    @OneToMany(mappedBy="role")
+    @OneToMany(mappedBy = "role")
     private List<User> users;
+
+
+    // Constructors
+    public Role() {
+    }
+
+    public Role(String roleName) {
+        this.roleName = roleName;
+    }
+
+
+    // Getters and Setters
 
     public long getRoleId() {
         return roleId;
@@ -44,23 +57,18 @@ public class Role {
         this.users = users;
     }
 
+    // equals and hashCode
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
-        Role that = (Role) o;
-
-        if (roleId != that.roleId) return false;
-        if (roleName != null ? !roleName.equals(that.roleName) : that.roleName != null) return false;
-
-        return true;
+        Role role = (Role) o;
+        return roleId == role.roleId && Objects.equals(roleName, role.roleName) && Objects.equals(users, role.users);
     }
 
     @Override
     public int hashCode() {
-        int result = (int) (roleId ^ (roleId >>> 32));
-        result = 31 * result + (roleName != null ? roleName.hashCode() : 0);
-        return result;
+        return Objects.hash(roleId, roleName, users);
     }
 }

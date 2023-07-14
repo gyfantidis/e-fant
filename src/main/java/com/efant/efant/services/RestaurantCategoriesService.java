@@ -22,7 +22,7 @@ public class RestaurantCategoriesService {
 
     public RestaurantCategories getRestaurantCategoriesById(Long id) throws Exception{
         return restaurantCategoriesRepository.findById(id)
-                .orElseThrow(() -> new Exception("Restaurant not exists with id: " + id));
+                .orElseThrow(() -> new Exception("Restaurants Category not exists with id: " + id));
 
     }
 
@@ -39,7 +39,7 @@ public class RestaurantCategoriesService {
             restaurantCategoriesRepository.deleteById(id);
         }
         else{
-            throw new Exception("Restaurant Category not exists with id" +id);
+            throw new Exception("Restaurants Category not exists with id" +id);
         }
 
 

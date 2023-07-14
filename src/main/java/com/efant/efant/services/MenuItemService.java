@@ -1,40 +1,40 @@
 package com.efant.efant.services;
 
 import com.efant.efant.model.entities.MenuItem;
-import com.efant.efant.repositories.MenuItemsRepository;
+import com.efant.efant.repositories.MenuItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class MenuItemsService {
+public class MenuItemService {
 
-    private MenuItemsRepository menuItemsRepository;
+    private MenuItemRepository menuItemRepository;
 
     @Autowired
-    public MenuItemsService(MenuItemsRepository menuItemsRepository){
-        this.menuItemsRepository=menuItemsRepository;
+    public MenuItemService(MenuItemRepository menuItemRepository){
+        this.menuItemRepository = menuItemRepository;
     }
 
 
     public List<MenuItem> getAllMenuItems(){
-        return menuItemsRepository.findAll();
+        return menuItemRepository.findAll();
     }
 
     public MenuItem getMenuItemById(Long id) throws Exception{
-        return menuItemsRepository.findById(id)
+        return menuItemRepository.findById(id)
                 .orElseThrow(() -> new Exception("Item not exists with id: " + id));
 
     }
 
     public MenuItem createMenuItem(MenuItem menuItem){
-        menuItem = menuItemsRepository.save(menuItem);
+        menuItem = menuItemRepository.save(menuItem);
         return menuItem;
     }
 
     public MenuItem updateMenuItem(MenuItem menuItem) throws Exception{
         Long itemsId = menuItem.getItemId();
-        MenuItem existingMenuItem = menuItemsRepository.findById(itemsId)
+        MenuItem existingMenuItem = menuItemRepository.findById(itemsId)
                 .orElseThrow(() -> new Exception("Item not exists with id: " + itemsId));
 
         existingMenuItem.setName(menuItem.getName());
@@ -42,7 +42,7 @@ public class MenuItemsService {
         existingMenuItem.setPrice(menuItem.getPrice());
         existingMenuItem.setImageUrl(menuItem.getImageUrl());
 
-        existingMenuItem = menuItemsRepository.save(existingMenuItem);
+        existingMenuItem = menuItemRepository.save(existingMenuItem);
         return existingMenuItem;
 
     }
@@ -50,10 +50,10 @@ public class MenuItemsService {
 
 
     public void deleteMenuItem(Long id) throws Exception{
-        MenuItem menuItem = menuItemsRepository.findById(id).orElse(null);
+        MenuItem menuItem = menuItemRepository.findById(id).orElse(null);
 
         if(menuItem != null){
-            menuItemsRepository.deleteById(id);
+            menuItemRepository.deleteById(id);
         }
         else{
             throw new Exception("Item not exists with id" +id);

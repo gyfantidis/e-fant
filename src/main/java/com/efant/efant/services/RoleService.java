@@ -13,13 +13,13 @@ public class RoleService {
     private RoleRepository roleRepository;
 
     @Autowired
-    public RoleService(RoleRepository roleRep){
-        roleRepository=roleRep;
+    public RoleService(RoleRepository roleRepository){
+        this.roleRepository=roleRepository;
     }
 
 
-    // methods
 
+    // methods
     public List<Role> getAllRoles(){
         return roleRepository.findAll();
     }

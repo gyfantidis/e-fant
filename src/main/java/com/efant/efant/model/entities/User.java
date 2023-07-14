@@ -1,9 +1,7 @@
 package com.efant.efant.model.entities;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
@@ -52,14 +50,13 @@ public class User {
 
 
 
-// Constructors, getters, and setters
+    // Constructors
 
 
     public User() {
     }
 
-    public User(Long user_id, String username, String password, String email, String firstName, String lastName, String phone, Long roleId, LocalDateTime createdAt, Role role) {
-        this.user_id = user_id;
+    public User(String username, String password, String email, String firstName, String lastName, String phone, Long roleId, LocalDateTime createdAt) {
         this.username = username;
         this.password = password;
         this.email = email;
@@ -68,8 +65,10 @@ public class User {
         this.phone = phone;
         this.roleId = roleId;
         this.createdAt = createdAt;
-        this.role = role;
     }
+
+    // getters, and setters
+
 
     public Long getUser_id() {
         return user_id;
@@ -161,17 +160,16 @@ public class User {
 
     // equals and hashCode
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(user_id, user.user_id) && Objects.equals(username, user.username) && Objects.equals(password, user.password) && Objects.equals(email, user.email) && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(phone, user.phone) && Objects.equals(roleId, user.roleId) && Objects.equals(createdAt, user.createdAt) && Objects.equals(role, user.role);
+        return Objects.equals(user_id, user.user_id) && Objects.equals(username, user.username) && Objects.equals(password, user.password) && Objects.equals(email, user.email) && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(phone, user.phone) && Objects.equals(roleId, user.roleId) && Objects.equals(createdAt, user.createdAt) && Objects.equals(role, user.role) && Objects.equals(addresses, user.addresses);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(user_id, username, password, email, firstName, lastName, phone, roleId, createdAt, role);
+        return Objects.hash(user_id, username, password, email, firstName, lastName, phone, roleId, createdAt, role, addresses);
     }
 }

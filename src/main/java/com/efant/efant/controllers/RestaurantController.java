@@ -14,8 +14,8 @@ public class RestaurantController {
     private RestaurantService restaurantService;
 
     @Autowired
-    public RestaurantController(RestaurantService restServ) {
-        restaurantService = restServ;
+    public RestaurantController(RestaurantService restaurantService) {
+        this.restaurantService = restaurantService;
     }
 
     @GetMapping("/restaurants")

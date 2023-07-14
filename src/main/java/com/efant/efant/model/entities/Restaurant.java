@@ -1,14 +1,18 @@
 package com.efant.efant.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "restaurants", schema = "efant")
 public class Restaurant {
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "restaurant_id")
@@ -44,6 +48,23 @@ public class Restaurant {
     private List<MenuItem> menuItems;
 
 
+
+    // Constructors
+
+
+    public Restaurant() {
+    }
+
+    public Restaurant(String name, String description, String address, String phone, String imageUrl, Timestamp createdAt) {
+        this.name = name;
+        this.description = description;
+        this.address = address;
+        this.phone = phone;
+        this.imageUrl = imageUrl;
+        this.createdAt = createdAt;
+    }
+
+    // Getters and Setters
 
 
     public long getRestaurantId() {
@@ -110,6 +131,7 @@ public class Restaurant {
         this.restaurantCategories = restaurantCategories;
     }
 
+
     public List<MenuItem> getMenuItems() {
         return menuItems;
     }
@@ -118,33 +140,18 @@ public class Restaurant {
         this.menuItems = menuItems;
     }
 
+    // equals and hashCode
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Restaurant that = (Restaurant) o;
-
-        if (restaurantId != that.restaurantId) return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
-        if (description != null ? !description.equals(that.description) : that.description != null) return false;
-        if (address != null ? !address.equals(that.address) : that.address != null) return false;
-        if (phone != null ? !phone.equals(that.phone) : that.phone != null) return false;
-        if (imageUrl != null ? !imageUrl.equals(that.imageUrl) : that.imageUrl != null) return false;
-        if (createdAt != null ? !createdAt.equals(that.createdAt) : that.createdAt != null) return false;
-
-        return true;
+        return restaurantId == that.restaurantId && Objects.equals(name, that.name) && Objects.equals(description, that.description) && Objects.equals(address, that.address) && Objects.equals(phone, that.phone) && Objects.equals(imageUrl, that.imageUrl) && Objects.equals(createdAt, that.createdAt) && Objects.equals(restaurantCategories, that.restaurantCategories) && Objects.equals(menuItems, that.menuItems);
     }
 
     @Override
     public int hashCode() {
-        int result = (int) (restaurantId ^ (restaurantId >>> 32));
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + (address != null ? address.hashCode() : 0);
-        result = 31 * result + (phone != null ? phone.hashCode() : 0);
-        result = 31 * result + (imageUrl != null ? imageUrl.hashCode() : 0);
-        result = 31 * result + (createdAt != null ? createdAt.hashCode() : 0);
-        return result;
+        return Objects.hash(restaurantId, name, description, address, phone, imageUrl, createdAt, restaurantCategories, menuItems);
     }
 }

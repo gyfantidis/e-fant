@@ -13,8 +13,8 @@ public class AddressService {
     private AddressRepository addressRepository;
 
     @Autowired
-    public AddressService(AddressRepository adRep) {
-        addressRepository = adRep;
+    public AddressService(AddressRepository addressRepository) {
+        this.addressRepository = addressRepository;
     }
 
     public List<Address> getAllAddress() {
@@ -23,7 +23,7 @@ public class AddressService {
 
     public Address getAddressById(Long id) throws Exception {
         return addressRepository.findById(id)
-                .orElseThrow(() -> new Exception("User not exists with id: " + id));
+                .orElseThrow(() -> new Exception("Address not exists with id: " + id));
 
     }
 
@@ -36,7 +36,7 @@ public class AddressService {
     public Address updateAddress(Address address) throws Exception {
         Long addressId = address.getAddressId();
         Address existingAddress = addressRepository.findById(addressId)
-                .orElseThrow(() -> new Exception("User not exists with id: " + addressId));
+                .orElseThrow(() -> new Exception("Address not exists with id: " + addressId));
 
         // Update the properties of the existingUser with the values from the updated user
         existingAddress.setAddress(address.getAddress());
@@ -47,7 +47,7 @@ public class AddressService {
         existingAddress.setFloor(address.getFloor());
         existingAddress.setRingName(address.getRingName());
         existingAddress.setComments(address.getComments());
-        existingAddress.setUser(address.getUser());
+
 
         // Save the updated user entity
         existingAddress = addressRepository.save(existingAddress);

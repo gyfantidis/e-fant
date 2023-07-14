@@ -39,6 +39,9 @@ public class Address {
     @Column(name = "comments", length = 200)
     private String comments;
 
+    @Column(name = "user_id")
+    private Long userId;
+
 
     @ManyToOne
     @JoinColumn(name = "user_id", insertable = false, updatable = false)
@@ -46,14 +49,13 @@ public class Address {
     private User user;
 
 
-// Constructors, getters, and setters
+    // Constructors
 
 
     public Address() {
     }
 
-    public Address(Long addressId, String address, String addressNumber, String floor, String ringName, String city, String state, String zipCode, String comments, User user) {
-        this.addressId = addressId;
+    public Address(String address, String addressNumber, String floor, String ringName, String city, String state, String zipCode, String comments, Long userId) {
         this.address = address;
         this.addressNumber = addressNumber;
         this.floor = floor;
@@ -62,8 +64,10 @@ public class Address {
         this.state = state;
         this.zipCode = zipCode;
         this.comments = comments;
-        this.user = user;
+        this.userId = userId;
     }
+
+    //getters, and setters
 
     public Long getAddressId() {
         return addressId;
@@ -145,7 +149,13 @@ public class Address {
         this.user = user;
     }
 
+    public Long getUserId() {
+        return userId;
+    }
 
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 
     // equals and hashCode
 
@@ -155,11 +165,11 @@ public class Address {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Address address1 = (Address) o;
-        return Objects.equals(addressId, address1.addressId) && Objects.equals(address, address1.address) && Objects.equals(addressNumber, address1.addressNumber) && Objects.equals(floor, address1.floor) && Objects.equals(ringName, address1.ringName) && Objects.equals(city, address1.city) && Objects.equals(state, address1.state) && Objects.equals(zipCode, address1.zipCode) && Objects.equals(comments, address1.comments) && Objects.equals(user, address1.user);
+        return Objects.equals(addressId, address1.addressId) && Objects.equals(address, address1.address) && Objects.equals(addressNumber, address1.addressNumber) && Objects.equals(floor, address1.floor) && Objects.equals(ringName, address1.ringName) && Objects.equals(city, address1.city) && Objects.equals(state, address1.state) && Objects.equals(zipCode, address1.zipCode) && Objects.equals(comments, address1.comments) && Objects.equals(userId, address1.userId) && Objects.equals(user, address1.user);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(addressId, address, addressNumber, floor, ringName, city, state, zipCode, comments, user);
+        return Objects.hash(addressId, address, addressNumber, floor, ringName, city, state, zipCode, comments, userId, user);
     }
 }

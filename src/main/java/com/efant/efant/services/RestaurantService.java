@@ -34,6 +34,15 @@ public class RestaurantService {
     }
 
     public Restaurant createRestaurant(Restaurant restaurant){
+
+        // List of Long with categories Id
+        List<Long> categoryId = restaurant.getRestaurantCategories().stream()
+                .map(c-> c.getCategoryId()).collect(Collectors.toList());
+
+
+        List<RestaurantCategories> newRestaurantCategory = restaurantCategoriesRepository.getCategoriesById(categoryId);
+
+        restaurant.setRestaurantCategories(newRestaurantCategory);
         restaurant = restaurantRepository.save(restaurant);
         return restaurant;
     }
@@ -51,7 +60,7 @@ public class RestaurantService {
         existingRestaurant.setPhone(restaurant.getPhone());
         existingRestaurant.setImageUrl(restaurant.getImageUrl());
 
-
+        //Update the List of restaurant Categories
         List<String> categoryNames = restaurant.getRestaurantCategories().stream()
                 .map(c-> c.getCategoryName()).collect(Collectors.toList());
         List<RestaurantCategories> newRestaurantCategory = restaurantCategoriesRepository.getCategoriesName(categoryNames);
@@ -59,34 +68,11 @@ public class RestaurantService {
         existingRestaurant.setRestaurantCategories(newRestaurantCategory);
 
 
-//        List<String> categoryNames = restaurant.getRestaurantCategories().stream()
-//            .map(c-> c.getCategoryName())
-//            .collect(Collectors.toList());
-//    List<RestaurantCategories> newRestaurantCategory = restaurantCategoriesRepository.findAll(categoryNames);
-//
-
-
 
         existingRestaurant = restaurantRepository.save(existingRestaurant);
         return existingRestaurant;
 
-
-
     }
-
-//    Restaurant existingRestaurant = getById(id);
-//
-//        existingRestaurant.setName(restaurant.getName());
-//
-//    List<String> categoryNames = restaurant.getRestaurantCategories().stream()
-//            .map(c-> c.getName())
-//            .collect(Collectors.toList());
-//    List<RestaurantCategory> newRestaurantCategory = restaurantCategoryRepository.getAllWithName(categoryNames);
-//
-//        existingRestaurant.setRestaurantCategories(newRestaurantCategory);
-
-
-
 
     public void deleteRestaurant(Long id) throws Exception{
         Restaurant restaurant = restaurantRepository.findById(id).orElse(null);

@@ -3,11 +3,13 @@ package com.efant.efant.model.entities;
 import jakarta.persistence.*;
 
 import java.util.List;
-import java.util.Set;
+import java.util.Objects;
+
 
 @Entity
 @Table(name = "restaurant_categories", schema = "efant", catalog = "postgres")
 public class RestaurantCategories {
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "category_id")
@@ -19,8 +21,18 @@ public class RestaurantCategories {
     @ManyToMany(mappedBy = "restaurantCategories")
     List<Restaurant> restaurants;
 
-//    @OneToMany(mappedBy = "restaurantCategories")
-//    List<RestaurantCategoryMapping> restaurantCategoryMappingList;
+    // Constructors
+
+
+    public RestaurantCategories() {
+    }
+
+    public RestaurantCategories(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    // Getters and Setters
+
 
     public long getCategoryId() {
         return categoryId;
@@ -38,23 +50,27 @@ public class RestaurantCategories {
         this.categoryName = categoryName;
     }
 
+    public List<Restaurant> getRestaurants() {
+        return restaurants;
+    }
+
+    public void setRestaurants(List<Restaurant> restaurants) {
+        this.restaurants = restaurants;
+    }
+
+    // equals and hashCode
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         RestaurantCategories that = (RestaurantCategories) o;
-
-        if (categoryId != that.categoryId) return false;
-        if (categoryName != null ? !categoryName.equals(that.categoryName) : that.categoryName != null) return false;
-
-        return true;
+        return categoryId == that.categoryId && Objects.equals(categoryName, that.categoryName) && Objects.equals(restaurants, that.restaurants);
     }
 
     @Override
     public int hashCode() {
-        int result = (int) (categoryId ^ (categoryId >>> 32));
-        result = 31 * result + (categoryName != null ? categoryName.hashCode() : 0);
-        return result;
+        return Objects.hash(categoryId, categoryName, restaurants);
     }
 }

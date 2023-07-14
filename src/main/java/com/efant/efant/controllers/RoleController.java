@@ -16,8 +16,8 @@ public class RoleController {
     private RoleService roleService;
 
     @Autowired
-    public RoleController(RoleService roleServ){
-        roleService=roleServ;
+    public RoleController(RoleService roleService){
+        this.roleService=roleService;
     }
 
     @GetMapping("/roles")

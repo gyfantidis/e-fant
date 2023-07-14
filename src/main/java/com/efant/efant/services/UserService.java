@@ -14,9 +14,10 @@ public class UserService {
     private UserRepository userRepository;
 
     @Autowired
-    public UserService(UserRepository ur){
-        userRepository=ur;
+    public UserService(UserRepository userRepository){
+        this.userRepository=userRepository;
     }
+
 
     // methods
 
