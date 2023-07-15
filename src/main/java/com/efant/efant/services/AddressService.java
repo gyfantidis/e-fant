@@ -38,7 +38,7 @@ public class AddressService {
         Address existingAddress = addressRepository.findById(addressId)
                 .orElseThrow(() -> new Exception("Address not exists with id: " + addressId));
 
-        // Update the properties of the existingUser with the values from the updated user
+        // Update the properties of the existingAddress with the values from the updated address
         existingAddress.setAddress(address.getAddress());
         existingAddress.setCity(address.getCity());
         existingAddress.setState(address.getState());
@@ -49,7 +49,7 @@ public class AddressService {
         existingAddress.setComments(address.getComments());
 
 
-        // Save the updated user entity
+        // Save the updated address entity
         existingAddress = addressRepository.save(existingAddress);
 
         return existingAddress;

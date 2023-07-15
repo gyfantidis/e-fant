@@ -13,12 +13,12 @@ public class AddressController {
     private AddressService addressService;
 
     @Autowired
-    public AddressController(AddressService addressService){
-        this.addressService=addressService;
+    public AddressController(AddressService addressService) {
+        this.addressService = addressService;
     }
 
     @GetMapping("/address")
-    public List<Address> getAllAddress(){
+    public List<Address> getAllAddress() {
         return addressService.getAllAddress();
     }
 
@@ -30,15 +30,15 @@ public class AddressController {
 
     @PostMapping("/address")
     @ResponseStatus(value = HttpStatus.CREATED)
-    public Address createAddress(@RequestBody Address address){
-        address=addressService.createAddress(address);
+    public Address createAddress(@RequestBody Address address) {
+        address = addressService.createAddress(address);
         return address;
     }
 
     @PutMapping("/address/{id}")
-    public Address updateAddress(@PathVariable Long id, @RequestBody Address address) throws Exception{
+    public Address updateAddress(@PathVariable Long id, @RequestBody Address address) throws Exception {
         // validate
-        if (!id.equals(address.getAddressId())){
+        if (!id.equals(address.getAddressId())) {
             throw new Exception("ID in path and ID in body are not the same");
         }
 
@@ -49,14 +49,9 @@ public class AddressController {
 
     @DeleteMapping("/address/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteAddress(@PathVariable Long id) throws Exception{
+    public void deleteAddress(@PathVariable Long id) throws Exception {
         addressService.deleteAddress(id);
     }
-
-
-
-
-
 
 
 }

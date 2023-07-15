@@ -83,7 +83,7 @@ CREATE TABLE IF NOT EXISTS efant.orders (
                                             order_date TIMESTAMP,
                                             total_amount DECIMAL(8, 2),
     delivery_address_id BIGINT,
-    status VARCHAR(20),
+    notes VARCHAR(20),
     FOREIGN KEY (user_id) REFERENCES efant.users(user_id),
     FOREIGN KEY (restaurant_id) REFERENCES efant.restaurants(restaurant_id),
     FOREIGN KEY (delivery_address_id) REFERENCES efant.addresses(address_id)
@@ -104,11 +104,12 @@ CREATE TABLE IF NOT EXISTS efant.order_items (
 CREATE TABLE IF NOT EXISTS efant.order_status (
                                                   order_status_id BIGSERIAL PRIMARY KEY,
                                                   order_id BIGINT,
-                                                  received VARCHAR(100),
-    processing VARCHAR(20),
-    on_the_road VARCHAR(20),
-    delivered VARCHAR(20),
-    delivery_date TIMESTAMP,
-    status VARCHAR(20),
+                                                  received BOOLEAN,
+                                                  processing BOOLEAN,
+                                                  on_the_road BOOLEAN,
+                                                  delivered BOOLEAN,
+                                                  delivery_date TIMESTAMP,
+                                                  status VARCHAR(20),
     FOREIGN KEY (order_id) REFERENCES efant.orders(order_id)
     );
+
