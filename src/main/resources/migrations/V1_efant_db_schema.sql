@@ -113,3 +113,25 @@ CREATE TABLE IF NOT EXISTS efant.order_status (
     FOREIGN KEY (order_id) REFERENCES efant.orders(order_id)
     );
 
+-- Reviews table
+CREATE TABLE IF NOT EXISTS efant.reviews (
+                                             review_id BIGSERIAL PRIMARY KEY,
+                                             user_id BIGINT,
+                                             restaurant_id BIGINT,
+                                             rating INTEGER,
+                                             comment TEXT,
+                                             review_date TIMESTAMP,
+                                             FOREIGN KEY (user_id) REFERENCES efant.users(user_id),
+    FOREIGN KEY (restaurant_id) REFERENCES efant.restaurants(restaurant_id)
+    );
+
+-- Favorites table
+CREATE TABLE IF NOT EXISTS efant.favorites (
+                                               favorite_id BIGSERIAL PRIMARY KEY,
+                                               user_id BIGINT,
+                                               restaurant_id BIGINT,
+                                               FOREIGN KEY (user_id) REFERENCES efant.users(user_id),
+    FOREIGN KEY (restaurant_id) REFERENCES efant.restaurants(restaurant_id)
+    );
+
+

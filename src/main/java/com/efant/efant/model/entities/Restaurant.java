@@ -1,5 +1,6 @@
 package com.efant.efant.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -35,17 +36,40 @@ public class Restaurant {
     @Basic
     @Column(name = "created_at")
     private Timestamp createdAt;
+
+
+//    @JsonManagedReference
+//    @ManyToMany(mappedBy = "restaurants")
+//    List<RestaurantCategories> restaurantCategories;
+
+    @JsonManagedReference
     @ManyToMany
     @JoinTable(
             name="restaurant_category_mapping",
             schema = "efant",
             joinColumns = @JoinColumn(name = "restaurant_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
+    //@JsonBackReference
     List<RestaurantCategories> restaurantCategories;
+
+
 
     @JsonManagedReference
     @OneToMany(mappedBy="restaurant")
     private List<MenuItem> menuItems;
+
+    @ManyToMany
+    @JoinTable(
+            name="favorites",
+            schema = "efant",
+            joinColumns = @JoinColumn(name = "restaurant_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
+    @JsonBackReference
+    List<User> users;
+
+    @OneToMany(mappedBy = "restaurant")
+    @JsonBackReference
+    private List<Review> reviews;
 
 
 
@@ -138,6 +162,22 @@ public class Restaurant {
 
     public void setMenuItems(List<MenuItem> menuItems) {
         this.menuItems = menuItems;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
     }
 
     // equals and hashCode

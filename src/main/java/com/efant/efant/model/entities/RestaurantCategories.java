@@ -1,5 +1,6 @@
 package com.efant.efant.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -18,8 +19,15 @@ public class RestaurantCategories {
     @Column(name = "category_name")
     private String categoryName;
 
-    @ManyToMany(mappedBy = "restaurantCategories")
+    @ManyToMany
+    @JoinTable(
+            name="restaurant_category_mapping",
+            schema = "efant",
+            joinColumns = @JoinColumn(name = "category_id"),
+            inverseJoinColumns = @JoinColumn(name = "restaurant_id"))
+    @JsonBackReference
     List<Restaurant> restaurants;
+
 
     // Constructors
 

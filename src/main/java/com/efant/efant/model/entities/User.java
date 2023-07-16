@@ -48,6 +48,19 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Address> addresses;
 
+    @OneToMany(mappedBy = "user")
+    @JsonBackReference
+    private List<Review> reviews;
+
+    @JsonManagedReference
+    @ManyToMany
+    @JoinTable(
+            name="favorites",
+            schema = "efant",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "restaurant_id"))
+    List<Restaurant> restaurants;
+
 
 
     // Constructors
@@ -156,6 +169,22 @@ public class User {
 
     public void setAddresses(List<Address> addresses) {
         this.addresses = addresses;
+    }
+
+    public List<Restaurant> getRestaurants() {
+        return restaurants;
+    }
+
+    public void setRestaurants(List<Restaurant> restaurants) {
+        this.restaurants = restaurants;
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
     }
 
     // equals and hashCode
