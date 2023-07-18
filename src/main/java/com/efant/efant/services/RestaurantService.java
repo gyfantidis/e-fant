@@ -2,14 +2,15 @@ package com.efant.efant.services;
 
 import com.efant.efant.model.entities.Restaurant;
 import com.efant.efant.model.entities.RestaurantCategories;
+import com.efant.efant.model.entities.Review;
 import com.efant.efant.repositories.RestaurantCategoriesRepository;
 import com.efant.efant.repositories.RestaurantRepository;
+import com.efant.efant.repositories.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
 
 
 @Service
@@ -18,26 +19,42 @@ public class RestaurantService {
     private RestaurantRepository restaurantRepository;
     private RestaurantCategoriesRepository restaurantCategoriesRepository;
 
+    private ReviewRepository reviewRepository;
+
     @Autowired
-    public RestaurantService(RestaurantRepository restaurantRepository, RestaurantCategoriesRepository restaurantCategoriesRepository) {
+    public RestaurantService(RestaurantRepository restaurantRepository, RestaurantCategoriesRepository restaurantCategoriesRepository, ReviewRepository reviewRepository) {
         this.restaurantRepository = restaurantRepository;
         this.restaurantCategoriesRepository = restaurantCategoriesRepository;
+        this.reviewRepository = reviewRepository;
     }
 
-    public List<Restaurant> getAllRestaurants(){
+    public List<Restaurant> getAllRestaurants() {
         return restaurantRepository.findAll();
     }
 
-    public Restaurant getRestaurantById(Long id) throws Exception{
+    public Restaurant getRestaurantById(Long id) throws Exception {
         return restaurantRepository.findById(id)
                 .orElseThrow(() -> new Exception("Restaurant not exists with id: " + id));
     }
 
-    public Restaurant createRestaurant(Restaurant restaurant){
+
+
+
+    public List<Review> getRestaurantReviews(Long id) throws Exception{
+        Restaurant restaurant = restaurantRepository.findById(id)
+                .orElseThrow(() -> new Exception("Restaurant not exists with id: " + id));
+        List<Long> reviewId = restaurant.getReviews().stream()
+                .map(c -> c.getReviewId()).collect(Collectors.toList());
+        List<Review> newReviews = reviewRepository.getReviewsById(reviewId);
+
+        return newReviews;
+    }
+
+    public Restaurant createRestaurant(Restaurant restaurant) {
 
         // List of Long with categories Id
         List<Long> categoryId = restaurant.getRestaurantCategories().stream()
-                .map(c-> c.getCategoryId()).collect(Collectors.toList());
+                .map(c -> c.getCategoryId()).collect(Collectors.toList());
 
 
         List<RestaurantCategories> newRestaurantCategory = restaurantCategoriesRepository.getCategoriesById(categoryId);
@@ -48,7 +65,7 @@ public class RestaurantService {
     }
 
 
-    public Restaurant updateRestaurant(Restaurant restaurant) throws Exception{
+    public Restaurant updateRestaurant(Restaurant restaurant) throws Exception {
         Long restaurantId = restaurant.getRestaurantId();
         Restaurant existingRestaurant = restaurantRepository.findById(restaurantId)
                 .orElseThrow(() -> new Exception("Restaurant not exists with id: " + restaurantId));
@@ -62,11 +79,10 @@ public class RestaurantService {
 
         //Update the List of restaurant Categories
         List<String> categoryNames = restaurant.getRestaurantCategories().stream()
-                .map(c-> c.getCategoryName()).collect(Collectors.toList());
+                .map(c -> c.getCategoryName()).collect(Collectors.toList());
         List<RestaurantCategories> newRestaurantCategory = restaurantCategoriesRepository.getCategoriesName(categoryNames);
 
         existingRestaurant.setRestaurantCategories(newRestaurantCategory);
-
 
 
         existingRestaurant = restaurantRepository.save(existingRestaurant);
@@ -74,14 +90,13 @@ public class RestaurantService {
 
     }
 
-    public void deleteRestaurant(Long id) throws Exception{
+    public void deleteRestaurant(Long id) throws Exception {
         Restaurant restaurant = restaurantRepository.findById(id).orElse(null);
 
-        if(restaurant != null){
+        if (restaurant != null) {
             restaurantRepository.deleteById(id);
-        }
-        else{
-            throw new Exception("Restaurant not exists with id" +id);
+        } else {
+            throw new Exception("Restaurant not exists with id" + id);
         }
     }
 

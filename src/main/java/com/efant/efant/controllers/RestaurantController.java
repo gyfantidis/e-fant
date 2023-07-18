@@ -1,6 +1,8 @@
 package com.efant.efant.controllers;
 
 import com.efant.efant.model.entities.Restaurant;
+import com.efant.efant.model.entities.RestaurantCategories;
+import com.efant.efant.model.entities.Review;
 import com.efant.efant.services.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,6 +28,11 @@ public class RestaurantController {
     @GetMapping("/restaurants/{id}")
     public Restaurant getRestaurantById(@PathVariable Long id) throws Exception{
         return restaurantService.getRestaurantById(id);
+    }
+
+    @GetMapping("/restaurants/reviews/{id}")
+    public List<Review> getRestaurantReviews(@PathVariable Long id) throws Exception{
+        return restaurantService.getRestaurantReviews(id);
     }
 
     @PostMapping("/restaurants")
