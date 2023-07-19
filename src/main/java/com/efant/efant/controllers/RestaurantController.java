@@ -1,9 +1,10 @@
 package com.efant.efant.controllers;
 
 import com.efant.efant.model.entities.Restaurant;
-import com.efant.efant.model.entities.RestaurantCategories;
 import com.efant.efant.model.entities.Review;
 import com.efant.efant.services.RestaurantService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +13,8 @@ import java.util.List;
 
 @RestController
 public class RestaurantController {
+
+    Logger logger = LoggerFactory.getLogger(UserController.class);
 
     private RestaurantService restaurantService;
 
@@ -37,7 +40,7 @@ public class RestaurantController {
 
     @PostMapping("/restaurants")
     @ResponseStatus(value = HttpStatus.CREATED)
-    public Restaurant createRestaurant(@RequestBody Restaurant restaurant){
+    public Restaurant createRestaurant(@RequestBody Restaurant restaurant) throws Exception{
         restaurant = restaurantService.createRestaurant(restaurant);
         return restaurant;
     }

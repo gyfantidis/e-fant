@@ -13,7 +13,7 @@ public class OrderStatus {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "order_status_id")
-    private long orderStatusId;
+    private Long orderStatusId;
     @Basic
     @Column(name = "order_id")
     private Long orderId;
@@ -63,11 +63,11 @@ public class OrderStatus {
     // Getters and Setters
 
 
-    public long getOrderStatusId() {
+    public Long getOrderStatusId() {
         return orderStatusId;
     }
 
-    public void setOrderStatusId(long orderStatusId) {
+    public void setOrderStatusId(Long orderStatusId) {
         this.orderStatusId = orderStatusId;
     }
 

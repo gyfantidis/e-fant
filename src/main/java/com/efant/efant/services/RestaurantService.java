@@ -1,5 +1,6 @@
 package com.efant.efant.services;
 
+import com.efant.efant.exeptions.EfantException;
 import com.efant.efant.model.entities.Restaurant;
 import com.efant.efant.model.entities.RestaurantCategories;
 import com.efant.efant.model.entities.Review;
@@ -7,6 +8,7 @@ import com.efant.efant.repositories.RestaurantCategoriesRepository;
 import com.efant.efant.repositories.RestaurantRepository;
 import com.efant.efant.repositories.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,7 +20,6 @@ public class RestaurantService {
 
     private RestaurantRepository restaurantRepository;
     private RestaurantCategoriesRepository restaurantCategoriesRepository;
-
     private ReviewRepository reviewRepository;
 
     @Autowired
@@ -34,15 +35,13 @@ public class RestaurantService {
 
     public Restaurant getRestaurantById(Long id) throws Exception {
         return restaurantRepository.findById(id)
-                .orElseThrow(() -> new Exception("Restaurant not exists with id: " + id));
+                .orElseThrow(() -> new EfantException("RESTAURANT_NOT_FOUND", "Restaurant not exists with id: " + id, HttpStatus.NOT_FOUND));
     }
 
 
-
-
-    public List<Review> getRestaurantReviews(Long id) throws Exception{
+    public List<Review> getRestaurantReviews(Long id) throws Exception {
         Restaurant restaurant = restaurantRepository.findById(id)
-                .orElseThrow(() -> new Exception("Restaurant not exists with id: " + id));
+                .orElseThrow(() -> new EfantException("RESTAURANT_NOT_FOUND", "Restaurant not exists with id: " + id, HttpStatus.NOT_FOUND));
         List<Long> reviewId = restaurant.getReviews().stream()
                 .map(c -> c.getReviewId()).collect(Collectors.toList());
         List<Review> newReviews = reviewRepository.getReviewsById(reviewId);
@@ -50,7 +49,12 @@ public class RestaurantService {
         return newReviews;
     }
 
-    public Restaurant createRestaurant(Restaurant restaurant) {
+    public Restaurant createRestaurant(Restaurant restaurant) throws Exception {
+
+
+        if (restaurant.getRestaurantId() != null) {
+            throw new EfantException("NEW_RESTAURANT_ID_IS_NOT_NULL", "Restaurant id must be null", HttpStatus.BAD_REQUEST);
+        }
 
         // List of Long with categories Id
         List<Long> categoryId = restaurant.getRestaurantCategories().stream()
@@ -68,7 +72,7 @@ public class RestaurantService {
     public Restaurant updateRestaurant(Restaurant restaurant) throws Exception {
         Long restaurantId = restaurant.getRestaurantId();
         Restaurant existingRestaurant = restaurantRepository.findById(restaurantId)
-                .orElseThrow(() -> new Exception("Restaurant not exists with id: " + restaurantId));
+                .orElseThrow(() -> new EfantException("RESTAURANT_NOT_FOUND", "Restaurant not exists with id: " + restaurantId, HttpStatus.NOT_FOUND));
 
         // Update the properties of the existingUser with the values from the updated user
         existingRestaurant.setName(restaurant.getName());
@@ -96,7 +100,7 @@ public class RestaurantService {
         if (restaurant != null) {
             restaurantRepository.deleteById(id);
         } else {
-            throw new Exception("Restaurant not exists with id" + id);
+            throw new EfantException("RESTAURANT_NOT_FOUND", "Restaurant not exists with id: " + id, HttpStatus.NOT_FOUND);
         }
     }
 

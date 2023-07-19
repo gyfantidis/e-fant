@@ -2,6 +2,8 @@ package com.efant.efant.controllers;
 
 import com.efant.efant.model.entities.MenuItem;
 import com.efant.efant.services.MenuItemService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +12,9 @@ import java.util.List;
 
 @RestController
 public class MenuItemController {
+
+    Logger logger = LoggerFactory.getLogger(UserController.class);
+
     private MenuItemService menuItemService;
 
     @Autowired
@@ -30,7 +35,7 @@ public class MenuItemController {
 
     @PostMapping("/menu/items")
     @ResponseStatus(value = HttpStatus.CREATED)
-    public MenuItem createMenuItem(@RequestBody MenuItem menuItem){
+    public MenuItem createMenuItem(@RequestBody MenuItem menuItem) throws Exception{
         menuItem = menuItemService.createMenuItem(menuItem);
         return menuItem;
     }

@@ -2,6 +2,8 @@ package com.efant.efant.controllers;
 
 import com.efant.efant.model.entities.OrderStatus;
 import com.efant.efant.services.OrderStatusService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +13,8 @@ import java.util.List;
 @RestController
 public class OrderStatusController {
     private OrderStatusService orderStatusService;
+
+    Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     public OrderStatusController(OrderStatusService orderStatusService) {
@@ -30,7 +34,7 @@ public class OrderStatusController {
 
     @PostMapping("/orders/status")
     @ResponseStatus(value = HttpStatus.CREATED)
-    public OrderStatus createOrderStatus(@RequestBody OrderStatus orderStatus) {
+    public OrderStatus createOrderStatus(@RequestBody OrderStatus orderStatus) throws Exception{
         orderStatus = orderStatusService.createOrderStatus(orderStatus);
         return orderStatus;
     }

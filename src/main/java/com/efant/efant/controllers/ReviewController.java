@@ -2,6 +2,8 @@ package com.efant.efant.controllers;
 
 import com.efant.efant.model.entities.Review;
 import com.efant.efant.services.ReviewService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +12,8 @@ import java.util.List;
 
 @RestController
 public class ReviewController {
+
+    Logger logger = LoggerFactory.getLogger(UserController.class);
 
     private ReviewService reviewService;
 
@@ -32,7 +36,7 @@ public class ReviewController {
 
     @PostMapping("/reviews")
     @ResponseStatus(value = HttpStatus.CREATED)
-    public Review createReview(@RequestBody Review review){
+    public Review createReview(@RequestBody Review review) throws Exception{
         review = reviewService.createReview(review);
         return review;
     }

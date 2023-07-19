@@ -1,8 +1,10 @@
 package com.efant.efant.services;
 
+import com.efant.efant.exeptions.EfantException;
 import com.efant.efant.model.entities.Order;
 import com.efant.efant.repositories.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,11 +27,13 @@ public class OrderService {
 
     public Order getOrderById(Long id) throws Exception{
         return orderRepository.findById(id)
-                .orElseThrow(() -> new Exception("Order not exists with id: " + id));
-
+                .orElseThrow(() -> new EfantException("ORDER_NOT_FOUND", "Order not exists with id: " + id, HttpStatus.NOT_FOUND));
     }
 
-    public Order createOrder(Order order){
+    public Order createOrder(Order order) throws Exception{
+        if (order.getOrderId() != null) {
+            throw new EfantException("NEW_ORDER_ID_IS_NOT_NULL", "Order id must be null", HttpStatus.BAD_REQUEST);
+        }
         order = orderRepository.save(order);
         return order;
     }
@@ -37,7 +41,7 @@ public class OrderService {
     public Order updateOrder(Order order) throws Exception{
         Long ordersId = order.getOrderId();
         Order existingOrder = orderRepository.findById(ordersId)
-                .orElseThrow(() -> new Exception("Order not exists with id: " + ordersId));
+                .orElseThrow(() -> new EfantException("ORDER_NOT_FOUND", "Order not exists with id: " + ordersId, HttpStatus.NOT_FOUND));
 
         existingOrder.setOrderDate(order.getOrderDate());
         existingOrder.setTotalAmount(order.getTotalAmount());
@@ -55,7 +59,7 @@ public class OrderService {
             orderRepository.deleteById(id);
         }
         else{
-            throw new Exception("Order not exists with id:" + id);
+            throw new EfantException("ORDER_NOT_FOUND", "Order not exists with id: " + id, HttpStatus.NOT_FOUND);
         }
     }
 

@@ -13,7 +13,7 @@ public class OrderItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "order_item")
-    private long orderItem;
+    private Long orderItem;
     @Basic
     @Column(name = "item_id")
     private Long itemId;
@@ -55,11 +55,11 @@ public class OrderItem {
 
     // Getters and Setters
 
-    public long getOrderItem() {
+    public Long getOrderItem() {
         return orderItem;
     }
 
-    public void setOrderItem(long orderItem) {
+    public void setOrderItem(Long orderItem) {
         this.orderItem = orderItem;
     }
 

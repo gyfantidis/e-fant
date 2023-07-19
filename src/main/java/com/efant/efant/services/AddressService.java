@@ -1,8 +1,10 @@
 package com.efant.efant.services;
 
+import com.efant.efant.exeptions.EfantException;
 import com.efant.efant.model.entities.Address;
 import com.efant.efant.repositories.AddressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,12 +25,14 @@ public class AddressService {
 
     public Address getAddressById(Long id) throws Exception {
         return addressRepository.findById(id)
-                .orElseThrow(() -> new Exception("Address not exists with id: " + id));
-
+                .orElseThrow(() -> new EfantException("ADDRESS_NOT_FOUND", "Address not exists with id: " + id, HttpStatus.NOT_FOUND));
     }
 
 
-    public Address createAddress(Address address) {
+    public Address createAddress(Address address) throws Exception {
+        if (address.getAddressId() != null) {
+            throw new EfantException("NEW_ADDRESS_ID_IS_NOT_NULL", "Address id must be null", HttpStatus.BAD_REQUEST);
+        }
         address = addressRepository.save(address);
         return address;
     }
@@ -36,7 +40,7 @@ public class AddressService {
     public Address updateAddress(Address address) throws Exception {
         Long addressId = address.getAddressId();
         Address existingAddress = addressRepository.findById(addressId)
-                .orElseThrow(() -> new Exception("Address not exists with id: " + addressId));
+                .orElseThrow(() -> new EfantException("ADDRESS_NOT_FOUND", "Address not exists with id: " + addressId, HttpStatus.NOT_FOUND));
 
         // Update the properties of the existingAddress with the values from the updated address
         existingAddress.setAddress(address.getAddress());
@@ -63,7 +67,7 @@ public class AddressService {
         if (address != null) {
             addressRepository.deleteById(id);
         } else {
-            throw new Exception("Address not exists with id:" + id);
+            throw new EfantException("ADDRESS_NOT_FOUND", "Address not exists with id: " + id, HttpStatus.NOT_FOUND);
         }
     }
 

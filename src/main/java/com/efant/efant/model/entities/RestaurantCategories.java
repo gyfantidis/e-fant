@@ -14,7 +14,7 @@ public class RestaurantCategories {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "category_id")
-    private long categoryId;
+    private Long categoryId;
     @Basic
     @Column(name = "category_name")
     private String categoryName;
@@ -42,11 +42,11 @@ public class RestaurantCategories {
     // Getters and Setters
 
 
-    public long getCategoryId() {
+    public Long getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(long categoryId) {
+    public void setCategoryId(Long categoryId) {
         this.categoryId = categoryId;
     }
 

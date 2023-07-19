@@ -11,7 +11,7 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "role_id")
-    private long roleId;
+    private Long roleId;
 
     @Basic
     @Column(name = "role_name")
@@ -33,11 +33,11 @@ public class Role {
 
     // Getters and Setters
 
-    public long getRoleId() {
+    public Long getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(long roleId) {
+    public void setRoleId(Long roleId) {
         this.roleId = roleId;
     }
 

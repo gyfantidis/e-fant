@@ -1,8 +1,10 @@
 package com.efant.efant.services;
 
+import com.efant.efant.exeptions.EfantException;
 import com.efant.efant.model.entities.MenuItem;
 import com.efant.efant.repositories.MenuItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -23,11 +25,14 @@ public class MenuItemService {
 
     public MenuItem getMenuItemById(Long id) throws Exception{
         return menuItemRepository.findById(id)
-                .orElseThrow(() -> new Exception("Item not exists with id: " + id));
+                .orElseThrow(() -> new EfantException("ITEM_NOT_FOUND", "Item not exists with id: " + id, HttpStatus.NOT_FOUND));
 
     }
 
-    public MenuItem createMenuItem(MenuItem menuItem){
+    public MenuItem createMenuItem(MenuItem menuItem) throws Exception{
+        if (menuItem.getItemId() != null) {
+            throw new EfantException("NEW_ITEM_ID_IS_NOT_NULL", "Item id must be null", HttpStatus.BAD_REQUEST);
+        }
         menuItem = menuItemRepository.save(menuItem);
         return menuItem;
     }
@@ -35,7 +40,7 @@ public class MenuItemService {
     public MenuItem updateMenuItem(MenuItem menuItem) throws Exception{
         Long itemsId = menuItem.getItemId();
         MenuItem existingMenuItem = menuItemRepository.findById(itemsId)
-                .orElseThrow(() -> new Exception("Item not exists with id: " + itemsId));
+                .orElseThrow(() -> new EfantException("ITEM_NOT_FOUND", "Item not exists with id: " + itemsId, HttpStatus.NOT_FOUND));
 
         existingMenuItem.setName(menuItem.getName());
         existingMenuItem.setDescription(menuItem.getDescription());
@@ -56,7 +61,7 @@ public class MenuItemService {
             menuItemRepository.deleteById(id);
         }
         else{
-            throw new Exception("Item not exists with id" +id);
+            throw new EfantException("ITEM_NOT_FOUND", "Item not exists with id: " + id, HttpStatus.NOT_FOUND);
 
         }
     }

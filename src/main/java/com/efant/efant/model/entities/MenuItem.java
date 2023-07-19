@@ -14,7 +14,7 @@ public class MenuItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "item_id")
-    private long itemId;
+    private Long itemId;
 
     @Basic
     @Column(name = "name")
@@ -57,11 +57,11 @@ public class MenuItem {
     // Getters and Setters
 
 
-    public long getItemId() {
+    public Long getItemId() {
         return itemId;
     }
 
-    public void setItemId(long itemId) {
+    public void setItemId(Long itemId) {
         this.itemId = itemId;
     }
 
