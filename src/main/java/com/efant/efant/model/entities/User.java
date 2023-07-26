@@ -11,9 +11,10 @@ import java.util.Objects;
 public class User {
 
     @Id
+    @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "users_user_id_seq")
     @SequenceGenerator(allocationSize = 1, name="users_user_id_seq", sequenceName = "efant.users_user_id_seq")
-    private Long user_id;
+    private Long id;
 
     @Column(name = "username", length = 50)
     private String username;
@@ -83,12 +84,12 @@ public class User {
     // getters, and setters
 
 
-    public Long getUser_id() {
-        return user_id;
+    public Long getId() {
+        return id;
     }
 
-    public void setUser_id(Long user_id) {
-        this.user_id = user_id;
+    public void setId(Long user_id) {
+        this.id = user_id;
     }
 
     public String getUsername() {
@@ -194,11 +195,11 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(user_id, user.user_id) && Objects.equals(username, user.username) && Objects.equals(password, user.password) && Objects.equals(email, user.email) && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(phone, user.phone) && Objects.equals(roleId, user.roleId) && Objects.equals(createdAt, user.createdAt) && Objects.equals(role, user.role) && Objects.equals(addresses, user.addresses);
+        return Objects.equals(id, user.id) && Objects.equals(username, user.username) && Objects.equals(password, user.password) && Objects.equals(email, user.email) && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(phone, user.phone) && Objects.equals(roleId, user.roleId) && Objects.equals(createdAt, user.createdAt) && Objects.equals(role, user.role) && Objects.equals(addresses, user.addresses);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(user_id, username, password, email, firstName, lastName, phone, roleId, createdAt, role, addresses);
+        return Objects.hash(id, username, password, email, firstName, lastName, phone, roleId, createdAt, role, addresses);
     }
 }
