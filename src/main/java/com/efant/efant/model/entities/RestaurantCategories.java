@@ -28,6 +28,9 @@ public class RestaurantCategories {
     @JsonBackReference
     List<Restaurant> restaurants;
 
+    @Column(name = "icon", length = 100)
+    private String icon;
+
 
     // Constructors
 
@@ -66,6 +69,15 @@ public class RestaurantCategories {
         this.restaurants = restaurants;
     }
 
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
+
     // equals and hashCode
 
 
@@ -74,11 +86,11 @@ public class RestaurantCategories {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         RestaurantCategories that = (RestaurantCategories) o;
-        return categoryId == that.categoryId && Objects.equals(categoryName, that.categoryName) && Objects.equals(restaurants, that.restaurants);
+        return Objects.equals(categoryId, that.categoryId) && Objects.equals(categoryName, that.categoryName) && Objects.equals(restaurants, that.restaurants) && Objects.equals(icon, that.icon);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(categoryId, categoryName, restaurants);
+        return Objects.hash(categoryId, categoryName, restaurants, icon);
     }
 }

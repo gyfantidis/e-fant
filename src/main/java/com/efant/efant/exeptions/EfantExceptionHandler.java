@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
@@ -19,7 +20,7 @@ public class EfantExceptionHandler extends ResponseEntityExceptionHandler {
     Logger logger = LoggerFactory.getLogger(EfantExceptionHandler.class);
 
 
-    @ExceptionHandler(value = {Exception.class, RuntimeException.class, MethodArgumentTypeMismatchException.class, UsernameNotFoundException.class})
+    @ExceptionHandler(value = {Exception.class, RuntimeException.class, MethodArgumentTypeMismatchException.class, UsernameNotFoundException.class, AuthenticationException.class})
     public ResponseEntity<Object> handleConflict(Exception ex, WebRequest request) {
         logger.error("Error in Rest App", ex);
 

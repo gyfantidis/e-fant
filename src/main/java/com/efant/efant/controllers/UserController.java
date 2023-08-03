@@ -1,6 +1,7 @@
 package com.efant.efant.controllers;
 
 import com.efant.efant.exeptions.EfantException;
+import com.efant.efant.model.dtos.UserCriteria;
 import com.efant.efant.model.dtos.UserDetailsDTO;
 import com.efant.efant.model.entities.User;
 import com.efant.efant.services.UserService;
@@ -26,8 +27,19 @@ public class UserController {
     }
 
 
+//    @GetMapping("/users")
+//    public List<User> getAllUsers() {
+//        return userService.getAllUsers();
+//    }
+
     @GetMapping("/users")
-    public List<User> getAllUsers() {
+    public List<User> getAllUsers(UserCriteria userCriteria) throws Exception {
+
+        if (userCriteria.getEmail() != null) {
+            return List.of(userService.getUserByEmail(userCriteria.getEmail()));
+        }
+
+        // run code to get the user from the database
         return userService.getAllUsers();
     }
 
@@ -43,6 +55,13 @@ public class UserController {
     @ResponseStatus(value = HttpStatus.CREATED)
     public User createUser(@RequestBody User user) throws Exception {
         user = userService.createUser(user);
+        return user;
+    }
+
+    @PostMapping("/users/signup")
+    @ResponseStatus(value = HttpStatus.CREATED)
+    public User signUpUser(@RequestBody User user) throws Exception{
+        user = userService.signUpUser(user);
         return user;
     }
 

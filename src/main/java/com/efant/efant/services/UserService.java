@@ -23,8 +23,9 @@ public class UserService implements UserDetailsService {
     private RoleRepository roleRepository;
 
     @Autowired
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, RoleRepository roleRepository) {
         this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
     }
 
 
@@ -59,7 +60,7 @@ public class UserService implements UserDetailsService {
         User existingUser = user;
         Role customerRole = roleRepository.findByRoleName("Customer");
         existingUser.setRole(customerRole);
-        return existingUser;
+        return createUser(existingUser);
     }
 
     public User getUserByEmail(String email) throws Exception {

@@ -27,6 +27,19 @@ public class MenuItemController {
         return menuItemService.getAllMenuItems();
     }
 
+    @GetMapping("/restaurants/items/{id}")
+    public List<MenuItem> getItemByRestaurantId(@PathVariable Long id) throws Exception {
+        try {
+            List<MenuItem> menuItems = menuItemService.getItemByRestaurantId(id);
+            if (menuItems.isEmpty()) {
+                return null;
+            }
+            return menuItems;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
     @GetMapping("/menu/items/{id}")
     public MenuItem getManuItemById(@PathVariable Long id)throws Exception{
         return menuItemService.getMenuItemById(id);

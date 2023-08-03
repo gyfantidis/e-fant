@@ -33,6 +33,12 @@ public class RestaurantService {
         return restaurantRepository.findAll();
     }
 
+
+//    public List<Restaurant> getRestaurantsByItemId(Long itemId) {
+//        // Assuming you have a method in the repository to retrieve restaurants by item ID
+//        return restaurantRepository.findByMenuItemId(itemId);
+//    }
+
     public Restaurant getRestaurantById(Long id) throws Exception {
         return restaurantRepository.findById(id)
                 .orElseThrow(() -> new EfantException("RESTAURANT_NOT_FOUND", "Restaurant not exists with id: " + id, HttpStatus.NOT_FOUND));
