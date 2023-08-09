@@ -4,13 +4,10 @@ import {useNavigate} from "react-router-dom";
 function LoginPage(props) {
 
     let [loginForm, setLoginForm] = useState({email: "", password: ""});
-
     const navigate = useNavigate();
 
-    const handleLoginSubmit = (event) => {
+    const handleLoginSubmit = (event) => { 
         event.preventDefault();
-
-
 
         // Encode the username and password in the Base64 auth format
         const basicAuth = btoa(`${loginForm.email}:${loginForm.password}`);

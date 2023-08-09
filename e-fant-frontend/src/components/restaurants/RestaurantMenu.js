@@ -5,21 +5,19 @@ import Items from "../menuItems/Items";
 
 function RestaurantMenu(props) {
 
+
     return (
 
         <div id="drink" className="tm-page-content">
-            {/* Drink Menu Page */}
+
             <ItemHeader/>
 
 
-
-                <Items>
-
-                </Items>
+            <Items restaurant={props.restaurant}/>
 
 
 
-            {/* end Drink Menu Page */}
+
         </div>
 
     );

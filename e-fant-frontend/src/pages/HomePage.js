@@ -4,11 +4,15 @@ import '../assets/css/tooplate-wave-cafe.css'; // Import Custom CSS
 import Header from "../components/Header";
 import React, {useEffect, useState} from "react";
 import Restaurants from "../components/restaurants/Restaurants";
+import {useParams} from "react-router-dom";
+
 
 
 
 
 function HomePage(props) {
+
+    let category = useParams();
 
     let [authToken, setAuthToken] = useState("");
 
@@ -48,6 +52,9 @@ function HomePage(props) {
         }
     }, [loginTriggered, logoutTriggered])
 
+
+
+
     return (
 
 
@@ -55,33 +62,24 @@ function HomePage(props) {
             {/*<Background/>*/}
             {/*<div className="tm-video-wrapper">*/}
             {/*    <video autoPlay muted loop id="tm-video">*/}
-            {/*        <source src={require("./assets/video/wave-cafe-video-bg.mp4")} type="video/mp4" />*/}
+            {/*        <source src={require("/video/wave-cafe-video-bg.mp4")} type="video/mp4" />*/}
             {/*    </video>*/}
             {/*</div>*/}
 
 
-            <Header selectedCategory = {selectedCategory} user={user} setLogoutTriggered = {setLogoutTriggered}>
-
-
-
-            </Header>
+            <Header selectedCategory = {selectedCategory} user={user} setLogoutTriggered = {setLogoutTriggered}/>
 
 
             <div className="tm-right">
                 <main className="tm-main">
 
-
-                    <Restaurants selectedCategory = {selectedCategory}>
-
-                    </Restaurants>
-
-                    {/*<RestaurantMenu>*/}
-
-                    {/*</RestaurantMenu>*/}
+                    <Restaurants category={{category}} selectedCategory = {selectedCategory}/>
 
                 </main>
 
             </div>
+
+
 
 
         </div>

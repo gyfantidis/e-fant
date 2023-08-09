@@ -1,7 +1,10 @@
 import Restaurant from "./Restaurant";
 import {useEffect, useState} from "react";
+import {useParams} from "react-router-dom";
 
 function Restaurants(props) {
+
+    let category = useParams();
 
 
 
@@ -9,25 +12,29 @@ function Restaurants(props) {
 
 
     let authCredentials = localStorage.getItem("authToken");
-    console.log(authCredentials)
+
 
     useEffect(() => {
-        fetch(`http://localhost:8080/restaurants`, {
+        let apiUrl = `http://localhost:8080/restaurants`;
+
+        if ([8, 9, 10, 11, 12, 13, 14].includes(Number(category.id))) {
+            apiUrl = `http://localhost:8080/restaurants/category/${category.id}`;
+        }
+
+        fetch(apiUrl, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": "Basic " + authCredentials
             }
-
         })
             .then(response => response.json())
             .then(data => {
                 setRestaurants(data);
-                console.log("Data type:", typeof data); // Check the data type
-                console.log("Data:", data); // Check the data content
-
+                console.log("Data type:", typeof data);
+                console.log("Data:", data);
             });
-    }, []);
+    }, [category.id, authCredentials]);
 
 
     return (

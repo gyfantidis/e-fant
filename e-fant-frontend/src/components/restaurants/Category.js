@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router-dom";
 
 
 function Category(props){
@@ -6,10 +7,16 @@ function Category(props){
 
     return(
         <li className="tm-page-nav-item">
-            <a href="#drink" className="tm-page-link">
-                <i className={`${category.icon} tm-page-link-icon`}></i>
-                <span>{category.categoryName}</span>
-            </a>
+
+                <Link to={`/${category.categoryId}`}>
+                    <a  className="tm-page-link">
+                    <i className={`${category.icon} tm-page-link-icon`}></i>
+                    <span>{category.categoryName}</span>
+                    </a>
+                </Link>
+
+
+
         </li>
     );
 }

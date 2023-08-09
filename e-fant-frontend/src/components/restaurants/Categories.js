@@ -3,13 +3,13 @@ import Category from "./Category";
 
 
 
-function Categories() {
+function Categories(props) {
 
 
     let [categories, setCategories] = useState([])
 
     let authCredentials = localStorage.getItem("authToken");
-    console.log(authCredentials)
+
 
     useEffect(() => {
         fetch(`http://localhost:8080/restaurants/categories`, {

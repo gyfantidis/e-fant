@@ -27,10 +27,6 @@ public class UserController {
     }
 
 
-//    @GetMapping("/users")
-//    public List<User> getAllUsers() {
-//        return userService.getAllUsers();
-//    }
 
     @GetMapping("/users")
     public List<User> getAllUsers(UserCriteria userCriteria) throws Exception {

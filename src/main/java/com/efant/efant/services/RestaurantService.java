@@ -34,10 +34,11 @@ public class RestaurantService {
     }
 
 
-//    public List<Restaurant> getRestaurantsByItemId(Long itemId) {
-//        // Assuming you have a method in the repository to retrieve restaurants by item ID
-//        return restaurantRepository.findByMenuItemId(itemId);
-//    }
+    public List<Restaurant> getRestaurantsByCategoryId(Long categoryId) {
+        // Assuming your RestaurantRepository has a method findByRestaurantCategoriesCategoryId
+        // This method should be implemented in your RestaurantRepository interface
+        return restaurantRepository.findByRestaurantCategoriesCategoryId(categoryId);
+    }
 
     public Restaurant getRestaurantById(Long id) throws Exception {
         return restaurantRepository.findById(id)

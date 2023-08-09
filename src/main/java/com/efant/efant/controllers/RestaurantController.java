@@ -46,6 +46,19 @@ public class RestaurantController {
 //        }
 //    }
 
+    @GetMapping("/restaurants/category/{id}")
+    public List<Restaurant> getRestaurantByCategory(@PathVariable Long id) throws Exception{
+        try {
+            List<Restaurant> restaurants = restaurantService.getRestaurantsByCategoryId(id);
+            return restaurants;
+        } catch (Exception e) {
+            // Handle the exception, return appropriate response or status code
+            e.printStackTrace();
+            return null; // For simplicity, you might want to improve error handling
+        }
+
+    }
+
         @GetMapping("/restaurants/{id}")
         public Restaurant getRestaurantById (@PathVariable Long id) throws Exception {
             return restaurantService.getRestaurantById(id);

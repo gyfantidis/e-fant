@@ -1,34 +1,69 @@
 import '../assets/fontawesome/css/all.min.css'; // Import Font Awesome CSS
 import '../assets/css/tooplate-wave-cafe.css'; // Import Custom CSS
 
-import Header from "../components/Header";
-import React, {useState} from "react";
-import Restaurants from "../components/restaurants/Restaurants";
 
+import React, {useEffect, useState} from "react";
 import RestaurantMenu from "../components/restaurants/RestaurantMenu";
-
+import {useParams} from "react-router-dom";
+import RestaurantHeader from "../components/RestaurantHeader";
 
 
 function RestaurantPage(props) {
 
-    let [selectedCategory, setSelectedCategory] = useState({})
+
+    //  const { restaurantId } = useParams(); // Access the "id" parameter from the URL
+    //
+    // let restaurant = useParams();
+    const {restaurantId, itemId} = useParams();
+
+
+    // let [restaurant, setRestaurant] = useState({});
+
+    let [user, setUser] = useState({});
+    let [loginTriggered, setLoginTriggered] = useState(false);
+    let [logoutTriggered, setLogoutTriggered] = useState(false);
+
+
+    useEffect(() => {
+        let loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"))
+        if (loggedInUser) {
+            setUser(loggedInUser);
+        }
+    }, [])
+
+    useEffect(() => {
+        if (loginTriggered) {
+            let loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"))
+            if (loggedInUser) {
+                setUser(loggedInUser);
+            }
+            setLoginTriggered(false);
+        }
+        if (logoutTriggered) {
+            setUser({});
+            localStorage.removeItem("loggedInUser");
+            localStorage.removeItem("authToken");
+            setLogoutTriggered(false);
+        }
+    }, [loginTriggered, logoutTriggered])
+
+    if (!restaurantId) {
+        return <div>Loading...</div>; // or handle the loading state appropriately
+    }
+
+
 
     return (
 
         <div className="tm-row">
-            {/*<Background/>*/}
-            {/*<div className="tm-video-wrapper">*/}
-            {/*    <video autoPlay muted loop id="tm-video">*/}
-            {/*        <source src={require("./assets/video/wave-cafe-video-bg.mp4")} type="video/mp4" />*/}
-            {/*    </video>*/}
-            {/*</div>*/}
-            <Header selectedCategory = {selectedCategory} >
 
-            </Header>
+            <RestaurantHeader item={{itemId}} restaurant={restaurantId} user={user} setLogoutTriggered={setLogoutTriggered}>
+
+            </RestaurantHeader>
             <div className="tm-right">
                 <main className="tm-main">
 
-                    <RestaurantMenu>
+                    <RestaurantMenu restaurant={restaurantId}>
 
                     </RestaurantMenu>
 
@@ -38,8 +73,6 @@ function RestaurantPage(props) {
 
 
         </div>
-
-
 
 
     )

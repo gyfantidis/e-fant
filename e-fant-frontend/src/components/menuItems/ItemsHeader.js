@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router-dom";
 
 
 function ItemHeader(){
@@ -7,14 +8,16 @@ function ItemHeader(){
         <nav className="tm-black-bg tm-drinks-nav">
             <ul>
                 <li>
-                    <a href="#" className="tm-tab-link active" data-id="cold">Iced Coffee</a>
+                    <h1 className="tm-tab-link" data-id="cold">Menu</h1>
                 </li>
                 <li>
-                    <a href="#" className="tm-tab-link" data-id="hot">Hot Coffee</a>
+                    <Link to={`/`}>
+                        <h1  className="tm-tab-link" data-id="hot">Back</h1>
+                    </Link>
                 </li>
-                <li>
-                    <a href="#" className="tm-tab-link" data-id="juice">Fruit Juice</a>
-                </li>
+
+
+
             </ul>
         </nav>
 

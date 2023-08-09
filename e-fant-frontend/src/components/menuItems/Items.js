@@ -1,23 +1,23 @@
 import {useEffect, useState} from "react";
 import Item from "./Item";
 import {useSearchParams} from "react-router-dom";
+import restaurant from "../restaurants/Restaurant";
 
 
 function Items(props) {
 
 
-            // image: require('../../assets/img/smoothie-2.png'),
-
+    let restaurantId = props.restaurant;
 
     let [items, setItems] = useState([]);
 
 
     let authCredentials = localStorage.getItem("authToken");
-    console.log(authCredentials)
+
 
 
     useEffect(() => {
-        fetch(`http://localhost:8080/restaurants/items/22`, {
+        fetch(`http://localhost:8080/restaurants/items/${restaurantId}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -34,11 +34,12 @@ function Items(props) {
             });
     }, []);
 
+
+
     return (
         <div className="tm-list">
-
             {items.map((item) => {
-                return <Item item={item} key={item.itemId}/>;
+                return <Item restaurant = {restaurantId} item={item} key={item.itemId}/>;
             })}
         </div>
 
