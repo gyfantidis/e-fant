@@ -1,6 +1,7 @@
 import React from "react";
 import ItemHeader from "../menuItems/ItemsHeader";
 import Items from "../menuItems/Items";
+import RestaurantsInfo from "../orderList/RestaurantsInfo";
 
 
 function RestaurantMenu(props) {
@@ -10,7 +11,9 @@ function RestaurantMenu(props) {
 
         <div id="drink" className="tm-page-content">
 
-            <ItemHeader/>
+            <RestaurantsInfo restaurant={props.restaurant}/>
+
+            <ItemHeader />
 
 
             <Items restaurant={props.restaurant}/>

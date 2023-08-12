@@ -2,9 +2,8 @@ import React, {useEffect, useState} from 'react';
 import Login from "./login/Login";
 import User from "./login/User";
 import EfantLabel from "./EfantLabel";
-import OrderList from "./orderList/OrderList";
 import Footer from "./Footer";
-
+import OrderItems from "./orderList/OrderItems";
 
 
 function RestaurantHeader(props) {
@@ -34,25 +33,24 @@ function RestaurantHeader(props) {
     }, []);
 
 
-
-
-
     return (
-        <header className="tm-left">
-            <div className="tm-left-inner">
 
-                {/*if user is logged in show profile else login page*/}
+            <header className="tm-left">
+                <div className="tm-left-inner">
 
-                {props.user.email ?
-                    <User user={props.user} setLogoutTriggered = {props.setLogoutTriggered}/>
-                    :
-                    <Login />
-                }
-                <EfantLabel/>
-                <OrderList restaurant={restaurant} item={props.item}/>
-                <Footer/>
-            </div>
-        </header>
+                    {/*if user is logged in show profile else login page*/}
+
+                    {props.user.email ?
+                        <User user={props.user} setLogoutTriggered={props.setLogoutTriggered}/>
+                        :
+                        <Login/>
+                    }
+                    <EfantLabel/>
+                    <OrderItems restaurant={restaurant} item={props.item}/>
+                    <Footer/>
+                </div>
+            </header>
+
     );
 }
 

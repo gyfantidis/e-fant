@@ -15,7 +15,8 @@ function Item(props){
                 <p className="tm-list-item-description">{item.description}</p>
                 <h3 className="tm-text-primary tm-list-item-name"><i className="fas fa-cart-plus fa-1x tm-site-logo"></i><span
                     className="tm-list-item-price">
-                    <Link to={`/restaurant/${props.restaurant}/item/${item.itemId}`}>
+                    <Link to={`/restaurant/${props.restaurant}/item/${item.itemId}`}
+                    >
                         Add to Cart
                     </Link>
                 </span>

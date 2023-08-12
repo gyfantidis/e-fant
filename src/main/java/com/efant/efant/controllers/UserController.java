@@ -47,7 +47,7 @@ public class UserController {
     }
 
 
-    @PostMapping("/users")
+    @PostMapping(value="/users", consumes = {"application/json"})
     @ResponseStatus(value = HttpStatus.CREATED)
     public User createUser(@RequestBody User user) throws Exception {
         user = userService.createUser(user);

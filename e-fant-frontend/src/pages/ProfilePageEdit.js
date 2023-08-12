@@ -1,19 +1,19 @@
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 
+function ProfilePageEdit(props) {
 
-function SignUpPage(props) {
-    let [user, setUser] = useState({
-        username: "",
-        firstName: "",
-        lastName: "",
-        email: "",
-        phone: "",
-        password: "",
-    });
+    let [user, setUser] = useState({});
 
     const [showPassword, setShowPassword] = useState(false); // State for password visibility
 
+
+    useEffect(() => {
+        let loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"))
+        if (loggedInUser) {
+            setUser(loggedInUser);
+        }
+    }, [])
 
     const handleInputChange = (event) => {
         const {name, value} = event.target;
@@ -28,8 +28,8 @@ function SignUpPage(props) {
 
         try {
             // Send the updated user profile to the server
-            const response = await fetch(`http://localhost:8080/users`, {
-                method: 'POST',
+            const response = await fetch(`http://localhost:8080/users/${user.id}`, {
+                method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -37,25 +37,25 @@ function SignUpPage(props) {
             });
 
             if (response.ok) {
-                // Successfully registered the user
-                console.log("User registered successfully.");
+                // Successfully updated the profile
+                console.log('Profile updated successfully.');
             } else {
                 // Handle error response
-                console.error("User registration failed.");
+                console.error('Profile update failed.');
             }
         } catch (error) {
-            console.error("An error occurred:", error);
+            console.error('An error occurred:', error);
         }
     };
 
 
     return (
+
         <div id="contact" className="tm-page-content">
             <div className="tm-black-bg tm-contact-text-container ">
-                <h2 className="tm-text-primary">Sign Up</h2>
-                <p>Sign up now to explore a world of delicious flavors! Join us and unlock the ability to order your
-                    favorite food with ease. Indulge in a culinary adventure right from the comfort of your home or
-                    wherever you are.</p>
+                <h2 className="tm-text-primary">Edit Profile</h2>
+                <p>Welcome to your profile! Your culinary journey continues here. From here, you can manage your
+                    profile.</p>
 
                 <button className="tm-page-nav-item tm-btn-primary">
 
@@ -63,9 +63,11 @@ function SignUpPage(props) {
                         Back to Menu
                     </Link>
                 </button>
-            </div>
 
-            <div className="tm-black-bg tm-contact-form-container tm-align-left">
+
+            </div>
+            <div className="tm-black-bg tm-contact-text-container ">
+
                 <form onSubmit={handleSubmit} id="contact-form">
                     <div className="tm-form-group">
                         <label htmlFor="username">Username:</label>
@@ -73,6 +75,7 @@ function SignUpPage(props) {
                             type="text"
                             name="username"
                             className="tm-form-control"
+                            placeholder="Username"
                             value={user.username}
                             onChange={handleInputChange}
                         />
@@ -83,6 +86,7 @@ function SignUpPage(props) {
                             type="text"
                             name="firstName"
                             className="tm-form-control"
+                            placeholder="First Name"
                             value={user.firstName}
                             onChange={handleInputChange}
                         />
@@ -93,6 +97,7 @@ function SignUpPage(props) {
                             type="text"
                             name="lastName"
                             className="tm-form-control"
+                            placeholder="Last Name"
                             value={user.lastName}
                             onChange={handleInputChange}
                         />
@@ -103,6 +108,7 @@ function SignUpPage(props) {
                             type="email"
                             name="email"
                             className="tm-form-control"
+                            placeholder="Email"
                             value={user.email}
                             onChange={handleInputChange}
                         />
@@ -113,6 +119,7 @@ function SignUpPage(props) {
                             type="tel"
                             name="phone"
                             className="tm-form-control"
+                            placeholder="Phone"
                             value={user.phone}
                             onChange={handleInputChange}
                         />
@@ -123,6 +130,7 @@ function SignUpPage(props) {
                             type={showPassword ? "text" : "password"} // Toggle password visibility
                             name="password"
                             className="tm-form-control"
+                            placeholder="Password"
                             value={user.password}
                             onChange={handleInputChange}
                         />
@@ -136,15 +144,42 @@ function SignUpPage(props) {
                     </div>
                     <div>
                         <button type="submit" className="tm-btn-primary tm-align-left">
-                            Sign Up
+                            Save Changes
                         </button>
                     </div>
                 </form>
+
+
+                {/*<h2 className="tm-text-primary">Username : {user.username}</h2>*/}
+                {/*<h2 className="tm-text-primary">First Name : {user.firstName}</h2>*/}
+                {/*<h2 className="tm-text-primary">Last Name : {user.lastName}</h2>*/}
+                {/*<h2 className="tm-text-primary">e-mail : {user.email}</h2>*/}
+                {/*<h2 className="tm-text-primary">Phone : {user.phone}</h2>*/}
+
+
+                {/*<h2>Address</h2>*/}
+                {/*{user.addresses && user.addresses.length > 0 ? (*/}
+                {/*    <div className="tm-text-primary">*/}
+                {/*        <p>*/}
+                {/*            {user.addresses[0].address} - {user.addresses[0].addressNumber} - {user.addresses[0].floor}*/}
+                {/*        </p>*/}
+                {/*        <p>*/}
+                {/*            {user.addresses[0].city} - Zip code: {user.addresses[0].zipCode}*/}
+                {/*        </p>*/}
+
+                {/*    </div>*/}
+                {/*) : (*/}
+                {/*    <p>No address available.</p>*/}
+                {/*)}*/}
+
+
             </div>
+
+
         </div>
 
 
     );
 }
 
-export default SignUpPage;
+export default ProfilePageEdit;

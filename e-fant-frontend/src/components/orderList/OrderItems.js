@@ -1,15 +1,23 @@
 import React, {useEffect, useState} from "react";
 import OrderItem from "./OrderItem";
-import Item from "../menuItems/Item";
 import OrderButton from "./OrderButton"; // Import your OrderItem component
 
 function OrderItems(props) {
 
 
-    const[items, setItems] = useState([]);
+    const [items, setItems] = useState([]);
     let authCredentials = localStorage.getItem("authToken");
+    const [itemKey, setItemKey] = useState(0); // Add a state for the key
+
+
+    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+    console.log(props.item);
 
     useEffect(() => {
+
+        console.log("!!!!!!!!3444444444444444444444444444444444444444");
+        console.log(props.item);
+
         if (props.item.itemId !== "0") {
             const apiUrl = `http://localhost:8080/menu/items/${props.item.itemId}`;
 
@@ -30,7 +38,7 @@ function OrderItems(props) {
             // Clear the item state when itemId is "0"
             setItems([]);
         }
-    }, [props.item.itemId, authCredentials]);
+    }, [itemKey]);
 
 
     const calculateTotalPrice = () => {
@@ -38,9 +46,8 @@ function OrderItems(props) {
     };
 
 
-
-    const handleDeleteItem = (itemId) => {
-        const itemIndex = items.findIndex(item => item.itemId === itemId);
+    const handleDeleteItem = (index) => {
+        const itemIndex = index;
 
         if (itemIndex !== -1) {
             const updatedItems = [...items];
@@ -49,21 +56,24 @@ function OrderItems(props) {
         }
     };
 
-
-
+    // When props.item changes, update the key to trigger useEffect
+    useEffect(() => {
+        setItemKey(prevKey => prevKey + 1);
+    }, [props.item]);
 
 
     return (
-        <div>
+        <div className="tm-black-bg tm-list-item-text restaurant-header">
             <h3 className="tm-text-primary tm-list-item-name"><i className="fas fa-utensils"></i>
                 <span
                     className="tm-list-item-price"><i className="fas fa-dollar-sign"></i>
                 </span></h3>
+            <div className="">
 
-
-            {items.map((item) => {
-                return <OrderItem item={item} key={item.itemId} onDelete={handleDeleteItem}/>;
+            {items.map((item, index) => {
+                return <OrderItem item={item} index={index} key={index} onDelete={handleDeleteItem}/>;
             })}
+            </div>
 
             <h3 className="tm-text-primary tm-list-item-name">Total Price:<span
                 className="tm-list-item-price">${calculateTotalPrice().toFixed(2)}</span></h3>

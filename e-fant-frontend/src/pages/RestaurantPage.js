@@ -52,14 +52,15 @@ function RestaurantPage(props) {
     }
 
 
-
     return (
+
 
         <div className="tm-row">
 
-            <RestaurantHeader item={{itemId}} restaurant={restaurantId} user={user} setLogoutTriggered={setLogoutTriggered}>
+            <RestaurantHeader item={{itemId}} restaurant={restaurantId} user={user}
+                              setLogoutTriggered={setLogoutTriggered}/>
 
-            </RestaurantHeader>
+
             <div className="tm-right">
                 <main className="tm-main">
 
@@ -68,7 +69,6 @@ function RestaurantPage(props) {
                     </RestaurantMenu>
 
                 </main>
-
             </div>
 
 

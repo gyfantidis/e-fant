@@ -37,6 +37,17 @@ p {
 
 h2 { margin-top: 0; }
 
+/* RestaurantHeader.css (or wherever you define your CSS for RestaurantHeader) */
+.restaurant-header {
+    /* Set a fixed height for the container */
+    height: 450px; /* You can adjust the height as needed */
+
+    /* Enable vertical scrolling when content overflows */
+    overflow-y: scroll;
+}
+
+
+
 #tm-video {
     position: fixed;
     right: 0;
