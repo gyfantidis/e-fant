@@ -24,7 +24,6 @@ public class Order {
 
     @ManyToOne
     @JoinColumn(name = "user_id" , insertable = false, updatable = false)
-    @JsonBackReference
     private User user;
 
     @Basic
@@ -33,14 +32,13 @@ public class Order {
 
     @ManyToOne
     @JoinColumn(name = "restaurant_id", insertable = false, updatable = false)
-    @JsonBackReference
     private Restaurant restaurant;
 
-    @JsonManagedReference
+
     @OneToMany(mappedBy = "order")
     private List<OrderItem> orderItems;
 
-    @JsonManagedReference
+
     @OneToOne(mappedBy = "order")
     private OrderStatus orderStatus;
 
@@ -94,13 +92,7 @@ public class Order {
         this.userId = userId;
     }
 
-    public User getUser() {
-        return user;
-    }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
 
     public Long getRestaurantId() {
         return restaurantId;
@@ -110,13 +102,7 @@ public class Order {
         this.restaurantId = restaurantId;
     }
 
-    public Restaurant getRestaurant() {
-        return restaurant;
-    }
 
-    public void setRestaurant(Restaurant restaurant) {
-        this.restaurant = restaurant;
-    }
 
     public List<OrderItem> getOrderItems() {
         return orderItems;

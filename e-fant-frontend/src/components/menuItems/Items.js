@@ -1,7 +1,6 @@
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import Item from "./Item";
-import {useSearchParams} from "react-router-dom";
-import restaurant from "../restaurants/Restaurant";
+
 
 
 function Items(props) {
@@ -37,6 +36,7 @@ function Items(props) {
 
 
     return (
+
         <div className="tm-list">
             {items.map((item) => {
                 return <Item restaurant = {restaurantId} item={item} key={item.itemId}/>;

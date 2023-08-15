@@ -20,7 +20,6 @@ public class OrderStatus {
 
     @OneToOne
     @JoinColumn(name = "order_id" , insertable = false, updatable = false)
-    @JsonBackReference
     private Order order;
 
     @Basic
@@ -77,14 +76,6 @@ public class OrderStatus {
 
     public void setOrderId(Long orderId) {
         this.orderId = orderId;
-    }
-
-    public Order getOrder() {
-        return order;
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
     }
 
     public Boolean getReceived() {

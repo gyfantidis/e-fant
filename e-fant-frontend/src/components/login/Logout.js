@@ -15,8 +15,6 @@ function Logout(props) {
     return (
             <p className="tm-black-bg tm-footer-text">
                 <a className="tm-footer-link" rel="sponsored"> <Link onClick={logout}> Logout </Link>  </a>
-
-
             </p>
 
 

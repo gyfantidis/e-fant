@@ -8,7 +8,9 @@ function Categories(props) {
 
     let [categories, setCategories] = useState([])
 
-    let authCredentials = localStorage.getItem("authToken");
+   // let authCredentials = localStorage.getItem("authToken");
+    const basicAuth = btoa(`user1@example.com:hashed_password_1`);
+
 
 
     useEffect(() => {
@@ -16,7 +18,7 @@ function Categories(props) {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": "Basic " + authCredentials
+                "Authorization": "Basic " + basicAuth
             }
 
         })

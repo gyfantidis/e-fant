@@ -7,20 +7,9 @@ import Restaurants from "../components/restaurants/Restaurants";
 import {useParams} from "react-router-dom";
 
 
-
-
-
 function HomePage(props) {
 
     let category = useParams();
-
-    let [authToken, setAuthToken] = useState("");
-
-    useEffect(() => {
-        setAuthToken(localStorage.getItem("authToken"));
-    })
-
-
 
     let [selectedCategory, setSelectedCategory] = useState({})
 
@@ -48,6 +37,15 @@ function HomePage(props) {
             setUser({});
             localStorage.removeItem("loggedInUser");
             localStorage.removeItem("authToken");
+            // Check if "restaurant" exists in local storage before removing
+            if (localStorage.getItem("restaurant")) {
+                localStorage.removeItem("restaurant");
+            }
+
+            // Check if "items" exists in local storage before removing
+            if (localStorage.getItem("items")) {
+                localStorage.removeItem("items");
+            }
             setLogoutTriggered(false);
         }
     }, [loginTriggered, logoutTriggered])
@@ -59,29 +57,17 @@ function HomePage(props) {
 
 
         <div className="tm-row">
-            {/*<Background/>*/}
-            {/*<div className="tm-video-wrapper">*/}
-            {/*    <video autoPlay muted loop id="tm-video">*/}
-            {/*        <source src={require("/video/wave-cafe-video-bg.mp4")} type="video/mp4" />*/}
-            {/*    </video>*/}
-            {/*</div>*/}
-
-
-            <Header selectedCategory = {selectedCategory} user={user} setLogoutTriggered = {setLogoutTriggered}/>
+            <Header selectedCategory = {selectedCategory} user={user} setLogoutTriggered = {setLogoutTriggered} />
 
 
             <div className="tm-right">
                 <main className="tm-main">
 
-                    <Restaurants category={{category}} selectedCategory = {selectedCategory}/>
+                    <Restaurants category={{category}} selectedCategory = {selectedCategory} />
 
                 </main>
 
             </div>
-
-
-
-
         </div>
 
 

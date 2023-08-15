@@ -1,10 +1,9 @@
 package com.efant.efant.model.entities;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
+
 
 @Entity
 @Table(name = "users", schema = "efant")
@@ -12,8 +11,7 @@ public class User {
 
     @Id
     @Column(name = "user_id")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "users_user_id_seq")
-    @SequenceGenerator(allocationSize = 1, name="users_user_id_seq", sequenceName = "efant.users_user_id_seq")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "username", length = 50)
@@ -42,25 +40,24 @@ public class User {
 
     @ManyToOne
     @JoinColumn(name="role_id", insertable = false, updatable = false)
-    @JsonBackReference
     private Role role;
 
-    @JsonManagedReference
+
     @OneToMany(mappedBy = "user")
     private List<Address> addresses;
 
     @OneToMany(mappedBy = "user")
-    @JsonBackReference
     private List<Review> reviews;
 
-    @JsonManagedReference
-    @ManyToMany
-    @JoinTable(
-            name="favorites",
-            schema = "efant",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "restaurant_id"))
-    List<Restaurant> restaurants;
+// For favorite restaurants in Version 2
+
+//    @ManyToMany
+//    @JoinTable(
+//            name="favorites",
+//            schema = "efant",
+//            joinColumns = @JoinColumn(name = "user_id"),
+//            inverseJoinColumns = @JoinColumn(name = "restaurant_id"))
+//    List<Restaurant> restaurants;
 
 
 
@@ -81,8 +78,9 @@ public class User {
         this.createdAt = createdAt;
     }
 
-    // getters, and setters
 
+
+    // getters, and setters
 
     public Long getId() {
         return id;
@@ -156,13 +154,7 @@ public class User {
         this.createdAt = createdAt;
     }
 
-    public Role getRole() {
-        return role;
-    }
 
-            public void setRole(Role role) {
-        this.role = role;
-    }
 
     public List<Address> getAddresses() {
         return addresses;
@@ -172,13 +164,15 @@ public class User {
         this.addresses = addresses;
     }
 
-    public List<Restaurant> getRestaurants() {
-        return restaurants;
-    }
+    // For favorite restaurants in Version 2
 
-    public void setRestaurants(List<Restaurant> restaurants) {
-        this.restaurants = restaurants;
-    }
+//    public List<Restaurant> getRestaurants() {
+//        return restaurants;
+//    }
+//
+//    public void setRestaurants(List<Restaurant> restaurants) {
+//        this.restaurants = restaurants;
+//    }
 
     public List<Review> getReviews() {
         return reviews;
@@ -190,16 +184,17 @@ public class User {
 
     // equals and hashCode
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(username, user.username) && Objects.equals(password, user.password) && Objects.equals(email, user.email) && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(phone, user.phone) && Objects.equals(roleId, user.roleId) && Objects.equals(createdAt, user.createdAt) && Objects.equals(role, user.role) && Objects.equals(addresses, user.addresses);
+        return Objects.equals(id, user.id) && Objects.equals(username, user.username) && Objects.equals(password, user.password) && Objects.equals(email, user.email) && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(phone, user.phone) && Objects.equals(roleId, user.roleId) && Objects.equals(createdAt, user.createdAt) && Objects.equals(role, user.role) && Objects.equals(addresses, user.addresses) && Objects.equals(reviews, user.reviews);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, password, email, firstName, lastName, phone, roleId, createdAt, role, addresses);
+        return Objects.hash(id, username, password, email, firstName, lastName, phone, roleId, createdAt, role, addresses, reviews);
     }
 }

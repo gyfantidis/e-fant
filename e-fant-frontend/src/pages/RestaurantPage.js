@@ -11,13 +11,10 @@ import RestaurantHeader from "../components/RestaurantHeader";
 function RestaurantPage(props) {
 
 
-    //  const { restaurantId } = useParams(); // Access the "id" parameter from the URL
-    //
-    // let restaurant = useParams();
+
     const {restaurantId, itemId} = useParams();
 
 
-    // let [restaurant, setRestaurant] = useState({});
 
     let [user, setUser] = useState({});
     let [loginTriggered, setLoginTriggered] = useState(false);
@@ -43,6 +40,15 @@ function RestaurantPage(props) {
             setUser({});
             localStorage.removeItem("loggedInUser");
             localStorage.removeItem("authToken");
+            // Check if "restaurant" exists in local storage before removing
+            if (localStorage.getItem("restaurant")) {
+                localStorage.removeItem("restaurant");
+            }
+
+            // Check if "items" exists in local storage before removing
+            if (localStorage.getItem("items")) {
+                localStorage.removeItem("items");
+            }
             setLogoutTriggered(false);
         }
     }, [loginTriggered, logoutTriggered])

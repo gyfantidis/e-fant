@@ -9,14 +9,8 @@ function OrderItems(props) {
     let authCredentials = localStorage.getItem("authToken");
     const [itemKey, setItemKey] = useState(0); // Add a state for the key
 
-
-    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-    console.log(props.item);
-
     useEffect(() => {
 
-        console.log("!!!!!!!!3444444444444444444444444444444444444444");
-        console.log(props.item);
 
         if (props.item.itemId !== "0") {
             const apiUrl = `http://localhost:8080/menu/items/${props.item.itemId}`;

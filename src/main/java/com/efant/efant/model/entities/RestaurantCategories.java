@@ -1,8 +1,7 @@
 package com.efant.efant.model.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import jakarta.persistence.*;
 
+import jakarta.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
@@ -25,7 +24,6 @@ public class RestaurantCategories {
             schema = "efant",
             joinColumns = @JoinColumn(name = "category_id"),
             inverseJoinColumns = @JoinColumn(name = "restaurant_id"))
-    @JsonBackReference
     List<Restaurant> restaurants;
 
     @Column(name = "icon", length = 100)
@@ -41,6 +39,8 @@ public class RestaurantCategories {
     public RestaurantCategories(String categoryName) {
         this.categoryName = categoryName;
     }
+
+
 
     // Getters and Setters
 
@@ -61,13 +61,7 @@ public class RestaurantCategories {
         this.categoryName = categoryName;
     }
 
-    public List<Restaurant> getRestaurants() {
-        return restaurants;
-    }
 
-    public void setRestaurants(List<Restaurant> restaurants) {
-        this.restaurants = restaurants;
-    }
 
     public String getIcon() {
         return icon;

@@ -15,15 +15,22 @@ function Restaurant(props) {
 
             <div className="tm-special-item-description">
                 <h2 className="tm-text-primary tm-special-item-title">
-
-                    <Link to={`/restaurant/${restaurant.restaurantId}/item/${0}`}>
-                        {restaurant.name}
-                    </Link>
+                    {localStorage.getItem("authToken") ? (
+                        <Link to={`/restaurant/${restaurant.restaurantId}/item/${0}`}>
+                            {restaurant.name}
+                        </Link>
+                    ) : (
+                        <Link onClick={() => alert("To continue, please login or sign up.")}>
+                            {restaurant.name}
+                        </Link>
+                    )}
                 </h2>
                 <h2 className="tm-text-primary tm-special-item-title"></h2>
                 <p className="tm-special-item-text">{restaurant.description}</p>
-                <RestaurantReview/>
+                <RestaurantReview />
             </div>
+
+
         </div>
 
     );

@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity
-@Table(name = "menu_items", schema = "efant")
+@Table(name = "menu_items", schema = "efant" , catalog = "postgres")
 public class MenuItem {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,7 +35,6 @@ public class MenuItem {
 
     @ManyToOne
     @JoinColumn(name = "restaurant_id", insertable = false, updatable = false)
-    @JsonBackReference
     private Restaurant restaurant;
 
 
@@ -105,22 +104,17 @@ public class MenuItem {
         this.restaurantId = restaurantId;
     }
 
-    public Restaurant getRestaurant() {
-        return restaurant;
-    }
 
-    public void setRestaurant(Restaurant restaurant) {
-        this.restaurant = restaurant;
-    }
 
     // equals and hashCode
+
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         MenuItem menuItem = (MenuItem) o;
-        return itemId == menuItem.itemId && Objects.equals(name, menuItem.name) && Objects.equals(description, menuItem.description) && Objects.equals(price, menuItem.price) && Objects.equals(imageUrl, menuItem.imageUrl) && Objects.equals(restaurantId, menuItem.restaurantId) && Objects.equals(restaurant, menuItem.restaurant);
+        return Objects.equals(itemId, menuItem.itemId) && Objects.equals(name, menuItem.name) && Objects.equals(description, menuItem.description) && Objects.equals(price, menuItem.price) && Objects.equals(imageUrl, menuItem.imageUrl) && Objects.equals(restaurantId, menuItem.restaurantId) && Objects.equals(restaurant, menuItem.restaurant);
     }
 
     @Override

@@ -24,27 +24,11 @@ public class RestaurantController {
     }
 
     @GetMapping("/restaurants")
-    public List<Restaurant> getAllRestaurants(/*@PathVariable String categoryId*/) {
-//        if (categoryId != null) {
-//            return restaurantService.getByCategoryId(categoryId);
-//        }
-
+    public List<Restaurant> getAllRestaurants() {
         return restaurantService.getAllRestaurants();
     }
 
 
-//    @GetMapping("/restaurants/items/{id}")
-//    public List<Restaurant> getRestaurantsByItemId(@PathVariable Long id) throws Exception {
-//        try {
-//            List<Restaurant> restaurants = restaurantService.getRestaurantsByItemId(id);
-//            if (restaurants.isEmpty()) {
-//                return null;
-//            }
-//            return restaurants;
-//        } catch (Exception e) {
-//            return null;
-//        }
-//    }
 
     @GetMapping("/restaurants/category/{id}")
     public List<Restaurant> getRestaurantByCategory(@PathVariable Long id) throws Exception{

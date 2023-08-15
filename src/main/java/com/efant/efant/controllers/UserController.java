@@ -63,9 +63,9 @@ public class UserController {
 
 
     @PutMapping("/users/{id}")
-    public User updateUser(@PathVariable Long id, @RequestBody User user, Authentication authentication) throws Exception {
+    public User updateUser(@PathVariable Long id, @RequestBody User user /*, Authentication authentication*/) throws Exception {
 
-        isTheSameUserOrAdmir(id.intValue(), authentication);
+       // isTheSameUserOrAdmir(id.intValue(), authentication);
 
         // validate
         if (!id.equals(user.getId())) {

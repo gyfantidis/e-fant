@@ -30,7 +30,7 @@ function LoginPage(props) {
                 localStorage.setItem("authToken", basicAuth);
                 localStorage.setItem("loggedInUser", JSON.stringify(data[0]));
 
-                props.setLoginTriggered(true);
+
 
                 navigate('/');
 

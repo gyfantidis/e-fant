@@ -2,7 +2,6 @@ package com.efant.efant.services;
 
 import com.efant.efant.exeptions.EfantException;
 import com.efant.efant.model.dtos.UserDetailsDTO;
-import com.efant.efant.model.entities.Role;
 import com.efant.efant.model.entities.User;
 import com.efant.efant.repositories.RoleRepository;
 import com.efant.efant.repositories.UserRepository;
@@ -46,8 +45,8 @@ public class UserService implements UserDetailsService {
             throw new EfantException("NEW_USER_ID_IS_NOT_NULL", "User id must be null", HttpStatus.BAD_REQUEST);
         }
 
-        User existingUser = this.getUserByEmail(user.getEmail());
-        if (existingUser != null) {
+       // User existingUser = this.getUserByEmail(user.getEmail());
+        if (!userRepository.findByEmail(user.getEmail()).isEmpty()) {
             throw new EfantException("USER_EMAIL_ALREADY_EXISTS", "User with email " + user.getEmail() + " already exists.", HttpStatus.BAD_REQUEST);
         }
 
@@ -58,8 +57,7 @@ public class UserService implements UserDetailsService {
 
     public User signUpUser(User user) throws Exception{
         User existingUser = user;
-        Role customerRole = roleRepository.findByRoleName("Customer");
-        existingUser.setRole(customerRole);
+        existingUser.setRoleId(2L);
         return createUser(existingUser);
     }
 

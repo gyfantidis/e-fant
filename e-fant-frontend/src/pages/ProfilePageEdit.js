@@ -1,11 +1,23 @@
 import React, {useEffect, useState} from "react";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 function ProfilePageEdit(props) {
 
     let [user, setUser] = useState({});
 
+
+    let [authToken, setAuthToken] = useState("");
+
+    useEffect(() => {
+        setAuthToken(localStorage.getItem("authToken"));
+    })
+
+
     const [showPassword, setShowPassword] = useState(false); // State for password visibility
+
+    const navigate = useNavigate();
+
+    const now = new Date(); // Get current date and time
 
 
     useEffect(() => {
@@ -14,6 +26,10 @@ function ProfilePageEdit(props) {
             setUser(loggedInUser);
         }
     }, [])
+
+
+
+
 
     const handleInputChange = (event) => {
         const {name, value} = event.target;
@@ -26,25 +42,39 @@ function ProfilePageEdit(props) {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
+        const basicAuth = authToken;
+
+
+
         try {
             // Send the updated user profile to the server
             const response = await fetch(`http://localhost:8080/users/${user.id}`, {
                 method: 'PUT',
                 headers: {
-                    'Content-Type': 'application/json',
+                    "Content-Type": "application/json",
+                    "Authorization": "Basic " + basicAuth
                 },
                 body: JSON.stringify(user), // Send the user object as JSON
             });
 
+
+
+
             if (response.ok) {
                 // Successfully updated the profile
                 console.log('Profile updated successfully.');
+                alert('Profile updated successfully.');
+                localStorage.removeItem("loggedInUser");
+                localStorage.setItem("loggedInUser", JSON.stringify(user));
+                navigate('/profile');
             } else {
                 // Handle error response
                 console.error('Profile update failed.');
+                alert('Profile update failed.');
             }
         } catch (error) {
             console.error('An error occurred:', error);
+            alert('An error occurred:', error);
         }
     };
 

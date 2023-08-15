@@ -1,11 +1,12 @@
 package com.efant.efant.model.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
 import java.util.Objects;
+
+
+// For Version 2
 
 @Entity
 @Table(name = "reviews", schema = "efant", catalog = "postgres")
@@ -32,12 +33,12 @@ public class Review {
     private Timestamp reviewDate;
 
 
-    @JsonManagedReference
+
     @ManyToOne
     @JoinColumn(name = "user_id" , insertable = false, updatable = false)
     private User user;
 
-    @JsonManagedReference
+
     @ManyToOne
     @JoinColumn(name = "restaurant_id", insertable = false, updatable = false)
     private Restaurant restaurant;
@@ -106,21 +107,7 @@ public class Review {
         this.reviewDate = reviewDate;
     }
 
-    public User getUser() {
-        return user;
-    }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Restaurant getRestaurant() {
-        return restaurant;
-    }
-
-    public void setRestaurant(Restaurant restaurant) {
-        this.restaurant = restaurant;
-    }
 
     // equals and hashCode
 

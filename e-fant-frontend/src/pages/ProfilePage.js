@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 
 function ProfilePage(props) {
 
+
     let [user, setUser] = useState({});
 
 
@@ -11,7 +12,7 @@ function ProfilePage(props) {
         if (loggedInUser) {
             setUser(loggedInUser);
         }
-    }, [])
+    });
 
 
     return (
@@ -52,7 +53,16 @@ function ProfilePage(props) {
 
                     </div>
                 ) : (
-                    <p>No address available.</p>
+                    <div>
+                        <p>No address available   -
+                        <button className="tm-page-nav-item ">
+
+                            <Link to={`/create-address`}>
+                                Create Address
+                            </Link>
+                        </button>
+                        </p>
+                    </div>
                 )}
                 <button className="tm-page-nav-item tm-btn-primary">
 
@@ -60,7 +70,6 @@ function ProfilePage(props) {
                         Edit Profile
                     </Link>
                 </button>
-
 
 
                 <br/>

@@ -11,7 +11,9 @@ function Restaurants(props) {
     let [restaurants, setRestaurants] = useState([]);
 
 
-    let authCredentials = localStorage.getItem("authToken");
+   // let authCredentials = localStorage.getItem("authToken");
+    const basicAuth = btoa(`user1@example.com:hashed_password_1`);
+
 
 
     useEffect(() => {
@@ -25,7 +27,7 @@ function Restaurants(props) {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": "Basic " + authCredentials
+                "Authorization": "Basic " + basicAuth
             }
         })
             .then(response => response.json())
@@ -34,7 +36,7 @@ function Restaurants(props) {
                 console.log("Data type:", typeof data);
                 console.log("Data:", data);
             });
-    }, [category.id, authCredentials]);
+    }, [category.id, basicAuth]);
 
 
     return (

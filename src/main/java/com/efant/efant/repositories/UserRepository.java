@@ -19,8 +19,4 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
 
 
-//    @Query(nativeQuery = true,
-//            value = "SELECT * FROM efant.restaurant_categories\n" +
-//                    "WHERE category_name IN (:categoryNames)")
-//    public List<RestaurantCategories> getCategoriesName(@Param("categoryNames") List<String> categoryNames);
 }

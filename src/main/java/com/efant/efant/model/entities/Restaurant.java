@@ -1,14 +1,11 @@
 package com.efant.efant.model.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.*;
 
+import jakarta.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Objects;
+
 
 @Entity
 @Table(name = "restaurants", schema = "efant")
@@ -38,37 +35,34 @@ public class Restaurant {
     private Timestamp createdAt;
 
 
-//    @JsonManagedReference
-//    @ManyToMany(mappedBy = "restaurants")
-//    List<RestaurantCategories> restaurantCategories;
 
-    @JsonManagedReference
+
     @ManyToMany
     @JoinTable(
             name="restaurant_category_mapping",
             schema = "efant",
             joinColumns = @JoinColumn(name = "restaurant_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
-    //@JsonBackReference
     List<RestaurantCategories> restaurantCategories;
 
 
 
-    @JsonManagedReference
+
     @OneToMany(mappedBy="restaurant")
     private List<MenuItem> menuItems;
 
-    @ManyToMany
-    @JoinTable(
-            name="favorites",
-            schema = "efant",
-            joinColumns = @JoinColumn(name = "restaurant_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id"))
-    @JsonBackReference
-    List<User> users;
+    //For Version 2
+
+//    @ManyToMany
+//    @JoinTable(
+//            name="favorites",
+//            schema = "efant",
+//            joinColumns = @JoinColumn(name = "restaurant_id"),
+//            inverseJoinColumns = @JoinColumn(name = "user_id"))
+//
+//    List<User> users;
 
     @OneToMany(mappedBy = "restaurant")
-    @JsonBackReference
     private List<Review> reviews;
 
 
@@ -164,13 +158,15 @@ public class Restaurant {
         this.menuItems = menuItems;
     }
 
-    public List<User> getUsers() {
-        return users;
-    }
 
-    public void setUsers(List<User> users) {
-        this.users = users;
-    }
+    // For Version 2
+//    public List<User> getUsers() {
+//        return users;
+//    }
+//
+//    public void setUsers(List<User> users) {
+//        this.users = users;
+//    }
 
     public List<Review> getReviews() {
         return reviews;
@@ -182,16 +178,17 @@ public class Restaurant {
 
     // equals and hashCode
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Restaurant that = (Restaurant) o;
-        return restaurantId == that.restaurantId && Objects.equals(name, that.name) && Objects.equals(description, that.description) && Objects.equals(address, that.address) && Objects.equals(phone, that.phone) && Objects.equals(imageUrl, that.imageUrl) && Objects.equals(createdAt, that.createdAt) && Objects.equals(restaurantCategories, that.restaurantCategories) && Objects.equals(menuItems, that.menuItems);
+        return Objects.equals(restaurantId, that.restaurantId) && Objects.equals(name, that.name) && Objects.equals(description, that.description) && Objects.equals(address, that.address) && Objects.equals(phone, that.phone) && Objects.equals(imageUrl, that.imageUrl) && Objects.equals(createdAt, that.createdAt) && Objects.equals(restaurantCategories, that.restaurantCategories) && Objects.equals(menuItems, that.menuItems) && Objects.equals(reviews, that.reviews);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(restaurantId, name, description, address, phone, imageUrl, createdAt, restaurantCategories, menuItems);
+        return Objects.hash(restaurantId, name, description, address, phone, imageUrl, createdAt, restaurantCategories, menuItems, reviews);
     }
 }

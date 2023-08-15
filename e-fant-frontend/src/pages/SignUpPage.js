@@ -1,8 +1,11 @@
-import React, {useEffect, useState} from "react";
-import {Link} from "react-router-dom";
+import React, {useState} from "react";
+import {Link, useNavigate} from "react-router-dom";
 
 
 function SignUpPage(props) {
+    const now = new Date(); // Get current date and time
+
+
     let [user, setUser] = useState({
         username: "",
         firstName: "",
@@ -10,9 +13,16 @@ function SignUpPage(props) {
         email: "",
         phone: "",
         password: "",
+        createdAt: now
+
     });
 
+    const navigate = useNavigate();
+
     const [showPassword, setShowPassword] = useState(false); // State for password visibility
+
+
+    const [registrationStatus, setRegistrationStatus] = useState("initial"); // "initial", "success", "failure"
 
 
     const handleInputChange = (event) => {
@@ -26,27 +36,43 @@ function SignUpPage(props) {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
+        const basicAuth = btoa(`user1@example.com:hashed_password_1`);
+
         try {
             // Send the updated user profile to the server
-            const response = await fetch(`http://localhost:8080/users`, {
+            const response = await fetch(`http://localhost:8080/users/signup`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
+                    "Content-Type": "application/json",
+                    "Authorization": "Basic " + basicAuth
                 },
                 body: JSON.stringify(user), // Send the user object as JSON
-            });
+            })
+
 
             if (response.ok) {
                 // Successfully registered the user
                 console.log("User registered successfully.");
+                alert("User registered successfully.");
+                setRegistrationStatus("success"); // Set the registration status to success
+                navigate('/login');
             } else {
                 // Handle error response
                 console.error("User registration failed.");
+                alert("User registration failed.");
+                setRegistrationStatus("failure"); // Set the registration status to failure
+
             }
         } catch (error) {
             console.error("An error occurred:", error);
+            alert("An error occurred:", error);
+            setRegistrationStatus("failure"); // Set the registration status to failure
+
         }
     };
+
+
+
 
 
     return (

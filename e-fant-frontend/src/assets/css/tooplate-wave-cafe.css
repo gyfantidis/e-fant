@@ -301,6 +301,13 @@ h2 { margin-top: 0; }
     margin-right: 0;
 }
 
+.tm-align-center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
 .tm-mb-30 { margin-bottom: 30px; }
 
 @media (max-width: 1130px) and (min-width: 992px) {

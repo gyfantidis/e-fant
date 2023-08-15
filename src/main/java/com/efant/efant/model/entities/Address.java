@@ -45,7 +45,6 @@ public class Address {
 
     @ManyToOne
     @JoinColumn(name = "user_id", insertable = false, updatable = false)
-    @JsonBackReference
     private User user;
 
 
@@ -141,13 +140,7 @@ public class Address {
         this.comments = comments;
     }
 
-    public User getUser() {
-        return user;
-    }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
 
     public Long getUserId() {
         return userId;

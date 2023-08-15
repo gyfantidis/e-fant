@@ -29,7 +29,6 @@ public class OrderItem {
 
     @ManyToOne
     @JoinColumn(name = "order_id", insertable = false, updatable = false)
-    @JsonBackReference
     private Order order;
 
 
@@ -87,13 +86,6 @@ public class OrderItem {
         this.orderId = orderId;
     }
 
-    public Order getOrder() {
-        return order;
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
-    }
 
     public Integer getQuantity() {
         return quantity;
