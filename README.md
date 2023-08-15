@@ -80,11 +80,23 @@ The Json's responses
 <img src="src/screenShots/Screenshot2.png" alt="Home Page" width="600"/>\
 Home Page
 
+<img src="src/screenShots/Screenshot10.png" alt="Categorys" width="600"/>\
+Restaurant categories
+
+<img src="src/screenShots/Screenshot11.png" alt="Restaurants" width="600"/>\
+Restaurants 
+
 <img src="src/screenShots/Screenshot3.png" alt="Log in" width="600"/>\
 Log in Page
 
 <img src="src/screenShots/Screenshot4.png" alt="Profile" width="600"/>\
 Users profile Page
+
+<img src="src/screenShots/Screenshot8.png" alt="Sign up" width="600"/>\
+Sign up Page
+
+<img src="src/screenShots/Screenshot9.png" alt="Address" width="600"/>\
+Create new user's address Page
 
 <img src="src/screenShots/Screenshot5.png" alt="Restaurants Items" width="600"/>\
 Restaurants Item
