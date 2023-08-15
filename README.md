@@ -57,29 +57,36 @@ To run the application, follow these steps:
 
 1. Clone the repository:
 
-```sh
+
 git clone https://github.com/gyfantidis/e-fant.git
 
 ## API Documentation Example
 The API provides the following endpoints:
 
-![image](https://github.com/gyfantidis/e-fant/assets/96373640/1a19f7dc-f410-47f2-9747-81a911b7db8a)
+<img src="screenShots/Screenshot1.png" alt="Apis" width="600"/>\
+API Documentation
+
 
 
 ## Screenshots
 
-![image](https://github.com/gyfantidis/e-fant/assets/96373640/4c916e6f-1b9d-4092-833d-54aeef0c4705)
+<img src="screenShots/Screenshot2.png" alt="Home Page" width="600"/>\
+Home Page
 
-![image](https://github.com/gyfantidis/e-fant/assets/96373640/ffd12579-3b4e-4531-8fab-4420d7f95561)
+<img src="screenShots/Screenshot3.png" alt="Log in" width="600"/>\
+Log in Page
 
-![image](https://github.com/gyfantidis/e-fant/assets/96373640/209e8856-85d0-4af3-b8fc-7bae6797c69b)
+<img src="screenShots/Screenshot4.png" alt="Profile" width="600"/>\
+Users profile Page
 
-![image](https://github.com/gyfantidis/e-fant/assets/96373640/2a281417-4b77-4214-9f3f-1dac559deb0d)
+<img src="screenShots/Screenshot5.png" alt="Restaurants Items" width="600"/>\
+Restaurants Item
 
-![image](https://github.com/gyfantidis/e-fant/assets/96373640/5072263b-979c-4de1-95cf-3c97510fa414)
+<img src="screenShots/Screenshot6.png" alt="Order List" width="600"/>\
+Orders List
 
-![image](https://github.com/gyfantidis/e-fant/assets/96373640/e072d168-29a1-401a-9734-8edfabb4f25e)
-
+<img src="screenShots/Screenshot7.png" alt="Final List" width="600"/>\
+Final List and confirm order
 
 
 
