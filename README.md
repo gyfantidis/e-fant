@@ -61,31 +61,38 @@ To run the application, follow these steps:
 git clone https://github.com/gyfantidis/e-fant.git
 
 ## API Documentation Example
-The API provides the following endpoints:
+The API's provides the following endpoints:
 
-<img src="screenShots/Screenshot1.png" alt="Apis" width="600"/>\
+![image](https://github.com/gyfantidis/e-fant/assets/96373640/20ba4b06-df9b-4e31-8a99-cd49af0fb32f)
 API Documentation
+
+## JSON Responses
+
+The Json's responses
+
+![image](https://github.com/gyfantidis/e-fant/assets/96373640/3d602bc0-e80c-4c47-824e-86ce47c91adf)
+
 
 
 
 ## Screenshots
 
-<img src="screenShots/Screenshot2.png" alt="Home Page" width="600"/>\
+<img src="src/screenShots/Screenshot2.png" alt="Home Page" width="600"/>\
 Home Page
 
-<img src="screenShots/Screenshot3.png" alt="Log in" width="600"/>\
+<img src="src/screenShots/Screenshot3.png" alt="Log in" width="600"/>\
 Log in Page
 
-<img src="screenShots/Screenshot4.png" alt="Profile" width="600"/>\
+<img src="src/screenShots/Screenshot4.png" alt="Profile" width="600"/>\
 Users profile Page
 
-<img src="screenShots/Screenshot5.png" alt="Restaurants Items" width="600"/>\
+<img src="src/screenShots/Screenshot5.png" alt="Restaurants Items" width="600"/>\
 Restaurants Item
 
-<img src="screenShots/Screenshot6.png" alt="Order List" width="600"/>\
+<img src="src/screenShots/Screenshot6.png" alt="Order List" width="600"/>\
 Orders List
 
-<img src="screenShots/Screenshot7.png" alt="Final List" width="600"/>\
+<img src="src/screenShots/Screenshot7.png" alt="Final List" width="600"/>\
 Final List and confirm order
 
 
