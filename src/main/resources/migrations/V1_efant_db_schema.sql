@@ -160,9 +160,9 @@ VALUES
 
 INSERT INTO efant.users (username, password, email, first_name, last_name, phone, role_id, created_at)
 VALUES
-    ('user1', 'hashed_password_1', 'user1@example.com', 'John', 'Doe', '+1234567890', 2, NOW()),
+    ('user1', 'hashed_password_1', 'user1@example.com', 'John', 'Doe', '+1234567890', 1, NOW()),
     ('user2', 'hashed_password_2', 'user2@example.com', 'Jane', 'Smith', '+9876543210', 2, NOW()),
-    ('user3', 'hashed_password_3', 'user3@example.com', 'Michael', 'Johnson', '+1112223333', 2, NOW()),
+    ('user3', 'hashed_password_3', 'user3@example.com', 'Michael', 'Johnson', '+1112223333', 3, NOW()),
     ('user4', 'hashed_password_4', 'user4@example.com', 'Emily', 'Anderson', '+4445556666', 2, NOW()),
     ('user5', 'hashed_password_5', 'user5@example.com', 'David', 'Lee', '+7778889999', 2, NOW()),
     ('user6', 'hashed_password_6', 'user6@example.com', 'Sarah', 'Wilson', '+1112223333', 2, NOW()),
