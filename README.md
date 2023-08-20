@@ -17,12 +17,12 @@ Welcome to the E-Fant app repository! This project utilizes React, Spring Boot, 
 - CSS: Cascading Style Sheets for styling
 
 ### Backend
-- Spring Boot: Backend Java framework
-- Java: Programming language for backend development
-- Maven: Dependency management and build tool
+- Spring Boot: framework that simplifies the development of Java applications
+- Java: high-level, object-oriented programming language
+- Maven: build automation and project management tool in Java development
 
 ### Database
-- PostgreSQL: Relational database management system
+- PostgreSQL: open-source relational database management system (RDBMS)
 
   
 
@@ -30,34 +30,34 @@ Welcome to the E-Fant app repository! This project utilizes React, Spring Boot, 
 
 ### Prerequisites
 Before running the application, ensure that you have the following software installed:
+- Node.js
 - npm
-- Node.js: It can be installed via terminal via the command: `npm install node.js`
-- postgreSQL
+- postgreSQL v.15
 
 ### Usage
 To run the application, follow these steps:
-- Open a new terminal.
-- Navigate to: `cd restapi`
-- Run the command: `mvn spring-boot:run`
-
+1. Run the app to initialize schema creation: 
+   - Open a new terminal.
+   - Navigate to the root of the project where the pom.xml of the parent project lives: `cd {CLONED_DIRECTORY_PATH}\e-fant\`
+   - Run the command: `mvn spring-boot:run`
   
-1. Set up the database locally: 
-    - Navigate to path:`database/src/main/resources`
-    - Run the migrations in PostgreSQL console: `V1__efant_db_schema.sql`
-    - 
-    - 2. Start the backend server:
-   Run ReastApiApplication  
+2. Set up the database locally:
+    - After installing PostGreSQL server and the service is running on your machine (Windows may need restart)
+   set the PATH enviroment variables to include: `{POSTGRESQL_INSTALLATION_DIRECTORY}\{VERSION}\bin`
+    - Then navigate to path:`{CLONED_DIRECTORY_PATH}/src/main/resources/migrations/`
+    - Open a terminal and run: `psql -U postgres -d postgres -a -f V1_efant_db_schema.sql -W`
+  
+3. Restart the backend server:
+close running application and run again the command: `mvn spring-boot:run`  
 
-3. Start the frontend development server:
+4. Start the frontend development server:
     - Open a new terminal.
-    - Navigate to: `cd e-fant-frontend`
-    - Run the command: `npm start`
+    - Navigate to the frontend application: `cd {CLONED_DIRECTORY_PATH}\e-fant\e-fant-frontend`
+    - NOTE: only for the first time you are going to run this app also run the command: `npm install`
+    - Run the command: `npm start` 
+5. .Access the application in your web browser at: `http://localhost:3000`
 
-3. Access the application in your web browser at: `http://localhost:3000`
-
-1. Clone the repository:
-
-
+Clone the repository:
 git clone https://github.com/gyfantidis/e-fant.git
 
 ## API Documentation Example
