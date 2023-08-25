@@ -58,7 +58,7 @@ function FinalOrder(props) {
 
         try {
             // Send the updated user profile to the server
-            const orderResponse = await fetch(`http://localhost:8080/orders`, {
+            const orderResponse = await fetch(`http://3.93.11.35:8080/orders`, {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
@@ -91,7 +91,7 @@ function FinalOrder(props) {
 
 
                 for (const orderItemData of orderItemsData) {
-                    const orderItemsResponse = await fetch(`http://localhost:8080/orders/items`, {
+                    const orderItemsResponse = await fetch(`http://3.93.11.35:8080/orders/items`, {
                         method: 'POST',
                         headers: {
                             "Content-Type": "application/json",
@@ -101,9 +101,7 @@ function FinalOrder(props) {
                     });
 
 
-                    console.log("66666666666666666666666666666666666666");
-                    console.log(orderId);
-                    console.log(orderItemsData);
+
 
                     if (orderItemsResponse.ok) {
                         console.log("Order items registered successfully.");

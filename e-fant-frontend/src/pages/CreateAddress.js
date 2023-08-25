@@ -50,7 +50,7 @@ function CreateAddress(props) {
 
         try {
             // Send the updated user profile to the server
-            const response = await fetch(`http://localhost:8080/address`, {
+            const response = await fetch(`http://3.93.11.35:8080/address`, {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
@@ -86,7 +86,7 @@ function CreateAddress(props) {
 
 
     const findTheUserAgain = () => {
-        fetch(`http://localhost:8080/users/${address.userId}`, {
+        fetch(`http://3.93.11.35:8080/users/${address.userId}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",

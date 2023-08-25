@@ -14,7 +14,7 @@ function Categories(props) {
 
 
     useEffect(() => {
-        fetch(`http://localhost:8080/restaurants/categories`, {
+        fetch(`http://3.93.11.35:8080/restaurants/categories`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
