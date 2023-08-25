@@ -8,7 +8,7 @@ function Item(props){
 
     return(
         <div className="tm-list-item">
-            <img src={`/img/items/${item.imageUrl}`} alt="Image" className="tm-list-item-img"/>
+            <img src={`/img/items/aws/${item.imageUrl}`} alt="Image" className="tm-list-item-img"/>
             <div className="tm-black-bg tm-list-item-text">
                 <h3 className="tm-list-item-name">{item.name}<span
                     className="tm-list-item-price">{item.price}</span></h3>
