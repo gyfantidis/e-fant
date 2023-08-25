@@ -56,6 +56,7 @@ public class EFantApplication {
 		configuration.setAllowCredentials(true);
 		configuration.addAllowedOrigin("http://localhost:3000"); // Allow the React app origin
 		configuration.addAllowedOrigin("http://localhost:3001"); // Allow the React app origin
+		configuration.addAllowedOrigin("http://app.e-fant.com/"); // Allow the React app origin
 		configuration.addAllowedHeader("*");
 		configuration.addAllowedMethod("*");
 
