@@ -19,7 +19,7 @@ function Restaurants(props) {
     useEffect(() => {
         let apiUrl = `http://localhost:8080/restaurants`;
 
-        if ([8, 9, 10, 11, 12, 13, 14].includes(Number(category.id))) {
+        if ([2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14].includes(Number(category.id))) {
             apiUrl = `http://localhost:8080/restaurants/category/${category.id}`;
         }
 
