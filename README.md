@@ -24,22 +24,29 @@ Welcome to the E-Fant app repository! This project utilizes React, Spring Boot, 
 ### Database
 - PostgreSQL: open-source relational database management system (RDBMS)
 
-  
+
+
 ## AWS Hosting and Deployment
 
 The E-Fant App is hosted on AWS to ensure scalability, availability, and performance. You can access the deployed application here: [E-Fant AWS Deployment](http://app.e-fant.com/)
 
 - **Backend Hosting**
   - Amazon EC2 Instance: Hosting the Spring Boot backend application.
-  - Elastic IP: Providing a static IP address for the EC2 instance.  
+  - Elastic IP: Providing a static IP address for the EC2 instance.
 
 - **Frontend Hosting**
   - Amazon S3 Bucket: Hosting the React frontend files.
   - Amazon CloudFront: Content delivery network for improved frontend performance.
   - Amazon ACM: Managing SSL/TLS certificates for secure connections.
 
+- **Database Hosting**
+  - Amazon RDS: Hosting the PostgreSQL database, ensuring efficient and secure data management.
+
 - **Domain Management**
   - Amazon Route 53: Managing domain registration and DNS routing.
+
+
+
 
 ## Getting Started
 
