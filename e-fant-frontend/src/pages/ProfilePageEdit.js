@@ -48,7 +48,7 @@ function ProfilePageEdit(props) {
 
         try {
             // Send the updated user profile to the server
-            const response = await fetch(`http://3.93.11.35:8080/users/${user.id}`, {
+            const response = await fetch(`http://52.206.235.17:8080/users/${user.id}`, {
                 method: 'PUT',
                 headers: {
                     "Content-Type": "application/json",
@@ -178,30 +178,6 @@ function ProfilePageEdit(props) {
                         </button>
                     </div>
                 </form>
-
-
-                {/*<h2 className="tm-text-primary">Username : {user.username}</h2>*/}
-                {/*<h2 className="tm-text-primary">First Name : {user.firstName}</h2>*/}
-                {/*<h2 className="tm-text-primary">Last Name : {user.lastName}</h2>*/}
-                {/*<h2 className="tm-text-primary">e-mail : {user.email}</h2>*/}
-                {/*<h2 className="tm-text-primary">Phone : {user.phone}</h2>*/}
-
-
-                {/*<h2>Address</h2>*/}
-                {/*{user.addresses && user.addresses.length > 0 ? (*/}
-                {/*    <div className="tm-text-primary">*/}
-                {/*        <p>*/}
-                {/*            {user.addresses[0].address} - {user.addresses[0].addressNumber} - {user.addresses[0].floor}*/}
-                {/*        </p>*/}
-                {/*        <p>*/}
-                {/*            {user.addresses[0].city} - Zip code: {user.addresses[0].zipCode}*/}
-                {/*        </p>*/}
-
-                {/*    </div>*/}
-                {/*) : (*/}
-                {/*    <p>No address available.</p>*/}
-                {/*)}*/}
-
 
             </div>
 

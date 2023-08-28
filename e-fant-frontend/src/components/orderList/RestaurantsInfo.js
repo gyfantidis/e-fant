@@ -12,7 +12,7 @@ function RestaurantsInfo(props) {
 
 
     useEffect(() => {
-        fetch(`http://3.93.11.35:8080/restaurants/${restaurantId}`, {
+        fetch(`http://52.206.235.17:8080/restaurants/${restaurantId}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",

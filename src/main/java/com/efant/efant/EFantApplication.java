@@ -50,6 +50,7 @@ public class EFantApplication {
 	 * Allow the application to receive requests from the React app
 	 * @return
 	 */
+
 	@Bean
 	public CorsConfigurationSource corsConfigurationSource() {
 		CorsConfiguration configuration = new CorsConfiguration();
@@ -57,6 +58,9 @@ public class EFantApplication {
 		configuration.addAllowedOrigin("http://localhost:3000"); // Allow the React app origin
 		configuration.addAllowedOrigin("http://localhost:3001"); // Allow the React app origin
 		configuration.addAllowedOrigin("http://app.e-fant.com/"); // Allow the React app origin
+		configuration.addAllowedOrigin("https://app.e-fant.com/"); // Allow the React app origin
+		configuration.addAllowedOrigin("http://apptest.e-fant.com/"); // Allow the React app origin
+		configuration.addAllowedOrigin("https://apptest.e-fant.com/"); // Allow the React app origin
 		configuration.addAllowedHeader("*");
 		configuration.addAllowedMethod("*");
 

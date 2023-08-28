@@ -15,7 +15,7 @@ function RestaurantHeader(props) {
     let authCredentials = localStorage.getItem("authToken");
 
     useEffect(() => {
-        let apiUrl = `http://3.93.11.35:8080/restaurants/${props.restaurant}`;
+        let apiUrl = `http://52.206.235.17:8080/restaurants/${props.restaurant}`;
 
         fetch(apiUrl, {
             method: "GET",

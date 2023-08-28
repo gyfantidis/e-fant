@@ -17,10 +17,10 @@ function Restaurants(props) {
 
 
     useEffect(() => {
-        let apiUrl = `http://3.93.11.35:8080/restaurants`;
+        let apiUrl = `http://52.206.235.17:8080/restaurants`;
 
         if ([2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14].includes(Number(category.id))) {
-            apiUrl = `http://3.93.11.35:8080/restaurants/category/${category.id}`;
+            apiUrl = `http://52.206.235.17:8080/restaurants/category/${category.id}`;
         }
 
         fetch(apiUrl, {

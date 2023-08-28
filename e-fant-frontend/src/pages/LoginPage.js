@@ -12,7 +12,7 @@ function LoginPage(props) {
         // Encode the username and password in the Base64 auth format
         const basicAuth = btoa(`${loginForm.email}:${loginForm.password}`);
 
-        fetch(`http://3.93.11.35:8080/users?email=${loginForm.email}`, {
+        fetch(`http://52.206.235.17:8080/users?email=${loginForm.email}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",

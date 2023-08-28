@@ -13,7 +13,7 @@ function OrderItems(props) {
 
 
         if (props.item.itemId !== "0") {
-            const apiUrl = `http://3.93.11.35:8080/menu/items/${props.item.itemId}`;
+            const apiUrl = `http://52.206.235.17:8080/menu/items/${props.item.itemId}`;
 
             fetch(apiUrl, {
                 method: "GET",
